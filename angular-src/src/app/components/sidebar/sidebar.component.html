@@ -1,0 +1,29 @@
+<div class="row onTop">
+  <div class="col-md-9 clearMargPad sidebar">
+
+    <ul id="sideNavbar">
+      <li (click)="_compCommunicationService.activateDashboard()" (click) ="_compCommunicationService.deactivateHomeSite()">
+        <a  class="icon-link" [routerLink]="['/dashboard']">
+          <svg class="icon icon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path [class.activeIcon1]="_compCommunicationService.dashboardActive" class="icon1" fill="#303A3F" d="M137.8 512H69.5c-10 0-18-8.3-18-18.2V354c0-10 8-18 18-18h68.3c10 0 18 8 18 18v139.8c.2 10-8 18-18 18zm149.2 0h-62c-11.6 0-21.3-9.7-21.3-21.5V288.8c0-11.7 9.6-21.4 21.4-21.4h62c12 0 21.7 9.6 21.7 21.4v201.7c0 11.8-9.6 21.4-21.4 21.4zm149.5 0h-56.3c-13.3 0-24-11-24-24.2V224.3c0-13.3 10.8-24 24-24h56.3c13.3 0 24 10.8 24 24v263.5c0 13.3-10.7 24-24 24zM445 0c-22 1-39 19.5-38 41.6l-101.7 100-86.6-76-158.5 159c-20.4 2.7-35.7 20.3-35 41.2 1 22 19.7 39 41.7 38.2s39-19.6 38-41.6c0-1.8-.8-3.5-1-5.3l119.4-114 83.5 73L446 79.8c.8 0 1.6.2 2.4 0 22-.8 39-19.5 38.2-41.5-1-22-19.5-39-41.5-38z"/>
+          </svg>
+          <span id="dashboard" [class.activeSpan]="_compCommunicationService.dashboardActive"> Dashboard</span>
+        </a>
+      </li>
+
+
+      <li (click)="_compCommunicationService.activateStatistics()" (click) ="_compCommunicationService.deactivateHomeSite()">
+        <a  class="icon-link" [routerLink]="['/statistics']">
+          <svg class="icon icon2" xmlns="http://www.w3.org/2000/svg" id="Layer_3" data-name="Layer 3" viewBox="0 0 32 32">
+            <path [class.activeIcon2]="_compCommunicationService.statisticsActive" d="M15 9h11M6 9h3m14 7h3M6 16h11m0 7h9M6 23h5" class="cls-1"/>
+            <path [class.activeIcon2]="_compCommunicationService.statisticsActive" d="M14.5 9a2.6 2.6 0 0 1-2.5 2.5A2.6 2.6 0 0 1 9.5 9a2.5 2.5 0 0 1 5 0zm8 7a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" class="cls-2"/>
+            <path [class.activeIcon2]="_compCommunicationService.statisticsActive" d="M21 16a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" class="cls-3"/>
+            <path [class.activeIcon2]="_compCommunicationService.statisticsActive" d="M16.5 23a2.6 2.6 0 0 1-2.5 2.5 2.6 2.6 0 0 1-2.5-2.6 2.5 2.5 0 0 1 5 0z" class="cls-2"/>
+          </svg>
+          <span [class.activeSpan]="_compCommunicationService.statisticsActive" id="statistic">Statistics</span>
+        </a>
+      </li>
+
+    </ul>
+  </div> <!-- Sidebar inner col-9-md wrapper-->
+</div>

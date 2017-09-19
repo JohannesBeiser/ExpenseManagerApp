@@ -1,0 +1,45 @@
+/* This File contains Global overrides of Frameworks that are being compiled to this directory */
+
+@font-face { font-family: PrimeLight; src: url('resources/fonts/PrimeLight.otf'); }
+@font-face { font-family: PrimeRegular; src: url('resources/fonts/PrimeRegular.otf'); }
+
+*{
+  font-family: PrimeRegular;
+}
+
+html,body{
+  background-color: #EEEEEE;
+  height: 100%;
+}
+
+
+.datepicker-container,  .datepicker-input-container{
+  width: 100% !important;
+}
+
+.datepicker-input{
+  margin: 0 !important;
+  width: 95% !important;
+  font-size: 20px !important;
+  height: 2em ;
+  color: #222 !important;
+  text-align: left !important;
+  padding-left: 4% !important;
+  border: 1px solid #bbb !important;
+}
+
+.datepicker-input:focus{
+  outline: 1px solid #355C7D !important;
+}
+
+
+.datepicker-input-icon >i >svg{
+  width: 23px !important;
+  height: 23px !important;
+  position: absolute;
+  bottom: 25%;
+  right: 10%;
+}
+.datepicker-calendar{
+  width: 95% !important;
+}

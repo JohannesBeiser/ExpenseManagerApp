@@ -1,0 +1,59 @@
+.routedStyle{
+  color: #222;
+}
+
+.containerBox{
+  height: 93%;
+  color: #DDDDDD;
+}
+
+.clearMargPad{
+  padding: 0;
+  height: 100%;
+}
+.height{
+  height: 100%;
+}
+
+.sidebar{
+  background: #444;
+}
+
+.row{
+  height: 100%;
+}
+
+.container{
+  width: 100%;
+}
+
+#flash{
+  position: absolute;
+  z-index: 5;
+  width: 50%
+}
+
+
+
+  .siteContainerForBackgroundImage{
+    background-image: url("resources/expenseBackground.jpg");
+    background-size: cover;
+  }
+
+
+.gradientTest{
+  height: 8em;
+  width: 100%;
+  position: absolute;
+   background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0,0,0,0) 100%);
+}
+
+
+
+
+
+@media (max-width: 991px) {
+  #appSidebar{
+    display: none;
+  }
+}

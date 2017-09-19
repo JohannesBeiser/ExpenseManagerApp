@@ -1,0 +1,10 @@
+#clearDatabase{
+  background-color: #CE4441;
+  transition: background-color 0.2s ease;
+  line-height: 2em;
+}
+
+
+#clearDatabase:hover{
+  background-color: #C9302C;
+}

@@ -1,0 +1,625 @@
+/******************************************************************************/
+/*****************************   Left Side   **********************************/
+/******************************************************************************/
+
+
+.fullWidth{
+  width: 100%;
+}
+
+#wrapperLeftSide{
+  margin: 0 auto;
+  width: 85%;
+}
+#wrapperLeftSide *{
+  text-align: left;
+}
+#wrapperLeftSide>h2{
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+#wrapperLeftSide input{
+  margin-bottom: 20px;
+
+}
+#wrapperLeftSide hr{
+  margin-bottom: 30px;
+}
+
+#sectionHeader{
+  margin-top: 40px;
+}
+.sectionHeaderNoEntries{
+  background-color: #ddd;
+  border: 1px solid black;
+  padding:5%;
+  font-size: 2em;
+  font-color: #444;
+  text-align: center;
+}
+
+#valueInput, #descriptionInput, #dateInput, #submitNewExpense{
+  width: 100%;
+  height: 3em;
+  padding: 5px;
+  outline-color: #355C7D;
+
+}
+
+#categoryWrapper{
+  width: 80%;
+  margin: 0 auto;
+}
+
+#valueInput{
+  font-size: 22px;
+  padding-left: 10px;
+  height: 2.5em;
+  width: 95%;
+}
+
+
+#categoryNameField{
+  text-align: center !important;
+  margin: 10px 0 0 0;
+  font-family: PrimeLight;
+  font-size: 22px;
+}
+.categoryLabel>img{
+  width: 50px;
+  position: relative;
+  bottom: 0;
+  transition: bottom 0.15s ease-in-out;
+  cursor: pointer;
+
+}
+.categoryLabel>img:hover{
+  bottom: 7px;
+
+}
+.categoryLabel>input{
+  display: none;
+}
+
+#dateInput{
+  font-size: 20px;
+  width: 95%;
+  height: 2.2em;
+
+}
+
+#descriptionInput{
+  height: 3em;
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 95%;
+
+}
+
+#submitNewExpense{
+  text-align: center;
+  width: 40%;
+  background-color: #A0C47D;
+  margin-left: 30%;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+
+}
+#submitNewExpense:hover{
+  background-color: #78AB46;
+}
+
+.ui-datepicker-calendar *{
+  color:black;
+}
+.ui-datepicker-title *{
+  color:black;
+}
+
+.hrAddExpense{
+  border-color: #444;
+  width: 95%;
+  margin: 0;
+}
+
+/******************************************************************************/
+/*****************************   Middle    ************************************/
+/******************************************************************************/
+
+
+#wrapperGeneralInfo{
+  border: 1px solid black;
+  padding-bottom: 30px;
+}
+
+#currentMonthField{
+  text-align: center;
+  background-color: lightgrey;
+  font-size: 24px;
+  padding: 20px;
+  border-bottom: 1px solid #444;
+}
+
+#currentTotalExpensesField{
+  text-align: left;
+  padding: 20px;
+  font-weight: bold;
+  background-color: #AAA;
+}
+#currentTotalExpensesField>span{
+
+  float: right;
+}
+
+.legendList {
+  margin: 30px auto 0 auto;
+  font-size: 13px;
+  width: 90%;
+  padding: 0;
+  display: block;
+
+}
+
+#legendList1{
+  float: left;
+  margin: 5% 5% 0 5% !important;
+  width: 45%;
+  border-right: 1px solid black;
+}
+
+#legendList1{
+  margin: 0;
+  margin-top: 5%;
+}
+
+#legendList2{
+  width: 100%;
+  margin-top: 5%;
+}
+#legendList2>li{
+  margin-right: 0;
+}
+
+
+.legendList>li{
+  margin-right: 10px;
+  list-style-type: none;
+
+}
+.legendList>li>span{
+  font-family: PrimeLight;
+  font-size: 13px;
+}
+.legendList>li>div{
+  min-width: 30px;
+  height: 13px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#chartCanvas{
+  margin-top: 50px;
+}
+
+#wrapperGeneralInfo>section>h2{
+  margin: 30px 0 15px 0;
+}
+#wrapperGeneralInfo>section>hr{
+  width: 80%;
+  border:none;
+  height: 42px;
+  border-bottom: 1px solid #1f1209;
+  box-shadow: 0 20px 20px -20px #333;
+  margin: -50px auto 30px;
+
+}
+#wrapperGeneralInfo>section>ul{
+  margin:0 12%;
+}
+#wrapperGeneralInfo>section>ul>li{
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: left;
+}
+#wrapperGeneralInfo>section>ul>li>span{
+  font-family: PrimeLight;
+}
+
+.fixkostenBetrag{
+  float: right;
+}
+
+
+.overviewHeader{
+  text-align: center;
+}
+
+#categoryChart{
+  width: 65% !important;
+  height: 65% !important;
+  margin: 5% auto 0 auto;
+
+}
+.datepicker-calendar-day-names{
+  color: white !important;
+}
+
+
+
+
+
+/******************************************************************************/
+/*****************************   Right Section  **********************************/
+/******************************************************************************/
+
+
+#wrapperRightSide{
+    margin: 0 auto;
+    width: 70%;
+}
+#wrapperRightSide>h2{
+    font-size: 24px;
+    padding: 10px 0 20px 0;
+    border-bottom: 1px solid black;
+
+}
+#wrapperRightSide>ul{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+#wrapperRightSide>ul>*{
+    text-align: right;
+}
+#wrapperRightSide>ul>li{
+    border-bottom: 1px solid #444;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.expenseCategory{
+    margin-left: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 50px;
+    float: left;
+}
+.expenseCategory>img{
+    width: 100%;
+}
+.expenseCategoryName{
+    line-height: 2em;
+}
+
+
+
+.expenseData{
+    float: left;
+    text-align: left;
+    margin-left: 10px;
+}
+.expenseDate{
+    font-family: PrimeLight;
+}
+.expenseAmount{
+    text-align: right;
+    margin-right: 5%;
+    position: absolute;
+    right: 15%;
+    font-size: 20px;
+}
+.expenseComment{
+    text-align: left;
+    margin-left: 70px;
+}
+
+
+#latestTen{
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid #666;
+  background-color: white;
+}
+#latestTen li{
+  border-bottom: 1px solid #666;
+}
+
+.expenseComment{
+  display: none;
+}
+
+.sectionHeader{
+  font-size: 24px;
+}
+
+.expenseDescription{
+  margin-bottom: 3%;
+  text-align: center;
+}
+
+.listItem{
+  border-width: 1px 1px 0 1px;
+  border-color: black;
+  border-style: solid;
+  background-color: #DDD;
+  line-height: 1.5em;
+  cursor: pointer;
+  transition: background-color .25s ease;
+}
+.listItem:hover{
+  background-color: #EEE;
+}
+
+.listItem:last-child{
+  border-width: 1px 1px 1px 1px;
+  border-color: black;
+  border-style: solid;
+}
+
+.wrapperListEdit{
+  position: relative;
+}
+
+.iconEdit{
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 2.5em;
+  transition: transform .25s ease;
+}
+
+.iconEdit:hover{
+  transform: scale(1.25);
+}
+
+.wrapperExpenseListData{
+  float: left;
+  width: 89%;
+}
+
+
+
+ .expenseDateCollapse{
+  display: none;
+}
+
+
+
+@media (max-width: 1375px){
+  .expenseData{
+    display: none;
+  }
+  .expenseDateCollapse{
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .iconEdit{
+    right: 5px;
+  }
+  .expenseAmount{
+    right: initial;
+    left: 40%;
+  }
+
+}
+
+.clearFloat{
+  clear: both;
+}
+
+#latestExpenseHeader{
+  margin-bottom: 22px;
+  font-size: 1.5em;
+}
+
+#lastLatestHeader{
+  margin-top: 1.5em;
+  position: relative;
+}
+
+#lastSpan, #latestSpan{
+  cursor: pointer;
+}
+
+
+#lastSpan>span, #latestSpan>span{
+  display: none;
+}
+
+@@media (min-width: 1600px) {
+  #lastSpan>span, #latestSpan>span{
+    display: inline;
+  }
+}
+
+
+.latestActive{
+  background-color: #DDD;
+  position: relative;
+  top:3px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  border: 1px solid black;
+  border-bottom: 1px solid #ddd;
+  padding: 1% 1% 0 1%;
+}
+
+.latestActive>span{
+  display: inline !important;
+}
+
+
+
+#lastSpan{
+  padding-bottom: 5px;
+  position: absolute;
+  bottom:-1px;
+  right: 0;
+}
+
+#latestSpan{
+  padding: 10px;
+  top:-5px;
+}
+
+
+
+
+@media (max-width: 1250px){
+  #lastSpan>span, #latestSpan>span{
+    display: none !important;
+  }
+}
+
+  .infoCollapse{
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+
+  .activeInfoCollapse{
+    display: block;
+    position: relative;
+    animation-name: fade;
+    animation-duration: 0.5s;
+    opacity: 1;
+  }
+
+
+  @keyframes fade {
+    from {opacity: .4; }
+    to {opacity: 1; }
+  }
+
+
+
+
+
+
+
+
+
+/* ***************************   MODAL *************************** */
+
+/* The Modal (background) */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #DDDDDD;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+#editDeleteButton{
+  position: absolute;
+  top: 5%;
+  right: 7%;
+  line-height: 2em;
+  background-color: #CE4441;
+}
+#editDeleteButton:hover{
+  background-color: #C9302C;
+}
+
+#saveModalButton{
+  background-color:  #A0C47D;
+  float: right;
+  line-height: 3em;
+  min-width: 20%;
+}
+#saveModalButton:hover{
+  background-color:  #78AB46;
+}
+
+#cancelModalButton{
+  line-height: 3em;
+  min-width: 20%;
+}
+
+#modalForm{
+  margin-top: 5%;
+}
+
+#modalForm input{
+  line-height: 2em;
+  background-color: #eee;
+  border: 1px solid #888;
+  width: 25%;
+  padding:0 5px;
+}
+#modalForm select{
+  height: 2.25em;
+  width: 26%;
+  background-color: #eee;
+  padding:0 5px;
+}
+
+
+#modalForm label{
+  width: 20%;
+}
+
+#modalForm img{
+  margin-right: 0.5%;
+  width: 2.48em;
+}
+
+
+#modalCategoryLabel{
+  float: left;
+}
+
+.modalInputRow{
+  line-height: 3em;
+}
+
+#headerModalEdit{
+  font-size: 2em;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 2.5%;
+}
+
+#editCategory{
+  float: left;
+  margin-right: 1%;
+}
+
+
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top: -50px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+@keyframes animatetop {
+    from {top: -50px; opacity: 0}
+    to {top: 0; opacity: 1}
+}

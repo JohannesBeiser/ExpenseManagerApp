@@ -1,0 +1,120 @@
+.row{
+  height: 100%;
+}
+
+.sidebar{
+  background: #444;
+}
+.clearMargPad{
+  padding: 0;
+  height: 100%;
+}
+.onTop{
+  z-index: 2;
+}
+
+
+#sideNavbar{
+  text-decoration: none;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 35%;
+}
+
+#dashboard{
+  margin-top: 5%;
+}
+#statistic{
+  position: relative;
+  bottom: 10px;
+}
+
+.icon-link{
+  display: inline-block;
+  text-decoration: none;
+  width: 100%;
+}
+
+.icon-link>span{
+  opacity: 0;
+  color: #DDDDDD;
+  transition: opacity .15s ease-in-out;
+  display: block;
+  text-align: center;
+}
+
+.icon{
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.icon1{
+  fill: #DDDDDD;
+  transition: 0.15s ease-in-out;
+  width: 60%;
+}
+
+.icon2{
+  width: 80%;
+}
+
+.icon-link:hover>span{
+  opacity: 1;
+  color: #F8B195;
+}
+
+.icon-link:hover>svg>.icon1{
+  fill: #F8B195;
+}
+
+
+.cls-1,.cls-2{
+  fill:none;
+  stroke: #DDD;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: 0.15s ease-in-out;
+
+}
+
+.cls-1{
+  stroke-width:2px;
+}
+
+.cls-3{
+  fill: #DDD;
+  transition: 0.15s ease-in-out;
+
+}
+.icon-link:hover>svg>.cls-1,.icon-link:hover>svg>.cls-2, .icon-link:hover>svg>.cls-3 {
+  stroke: #F8B195;
+}
+
+/*
+.active>span{
+  opacity: 1;
+  color: #F8B195;
+}
+.active .cls-1, .active .cls-2, .active .cls-3{
+  stroke: #F8B195;
+}
+.active .icon1{
+  fill: #F8B195;
+}
+*/
+
+
+.activeSpan{
+  opacity: 1 !important;
+  color: #F8B195 !important;
+}
+
+
+.activeIcon2{
+  stroke: #F8B195;
+}
+
+.activeIcon1{
+  fill: #F8B195;
+}

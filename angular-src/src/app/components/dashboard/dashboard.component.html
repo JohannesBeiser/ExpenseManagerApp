@@ -1,0 +1,228 @@
+
+<script src="../../../../node_modules/chart.js/src/chart.js"></script> <!-- TODO: Wirklich nötig? -->
+
+
+
+
+<div class="row">
+  <div class="col-md-4"> <!-- Wrapper Left Side -->
+    <div id="wrapperLeftSide">
+
+      <h2 class="sectionHeader">New Expense</h2>
+      <hr class="hrAddExpense">
+      <form (submit)="onExpenseSubmit()">
+
+      <label class="fullWidth">Value:<br><input (focus)="focusFunctionAddValue()" (blur)="onBlurAddExpenseValue()" [(ngModel)]="value" id="valueInput" type="text" name="value"  placeholder="0.00 €"></label><br>
+      <label class="fullWidth">Date:<br><ng2-datepicker style="color: #DDD" [options]="datepickerOptions" [(ngModel)]="datepickerDate" [ngModelOptions]="{standalone: true}"></ng2-datepicker></label><br> <!-- TODO: Date foratieren und nur date.formatted in database eintragen sodass auch nutzereingaben wie "6.2.1996" oder "18-6-2001" oder "15/06/2017" möglich sind  -->
+      <hr class="hrAddExpense" style="margin-top: 5%">
+      <div id="categoryOptionFields"> <!--TODO: Generate with *ngFor to enable to easily add a category later on-->
+          <div id="categoryWrapper">
+          <label class="categoryLabel" (click)="setCategoryName('Food')">
+            <img [src]="categories[0].iconPath">
+            <input [(ngModel)]="category" type="radio" name="category" value="Food">
+          </label>
+          <label class="categoryLabel" (click)="setCategoryName('Transport')">
+            <img [src]="categories[1].iconPath">
+            <input [(ngModel)]="category"  type="radio" name="category" value="Transport">
+          </label>
+          <label class="categoryLabel" (click)="setCategoryName('Accommodation')">
+            <img [src]="categories[2].iconPath">
+            <input [(ngModel)]="category"  type="radio" name="category" value="Accommodation">
+          </label>
+          <label class="categoryLabel" (click)="setCategoryName('Leisure')">
+            <img [src]="categories[3].iconPath">
+            <input [(ngModel)]="category"  type="radio" name="category" value="Leisure">
+          </label>
+          <label class="categoryLabel" (click)="setCategoryName('Multimedia')">
+            <img [src]="categories[4].iconPath">
+            <input [(ngModel)]="category"  type="radio" name="category" value="Multimedia" >
+          </label>
+          <label class="categoryLabel" (click)="setCategoryName('Insurance & Health')">
+            <img [src]="categories[5].iconPath">
+            <input [(ngModel)]="category"  type="radio" name="category" value="Insurance & Health" >
+          </label>
+          <label class="categoryLabel" (click)="setCategoryName('Clothing & Hygiene')">
+            <img [src]="categories[6].iconPath">
+            <input [(ngModel)]="category"  type="radio" name="category" value="Clothing & Hygiene" >
+          </label>
+          <label class="categoryLabel" (click)="setCategoryName('General')">
+            <img [src]="categories[7].iconPath">
+            <input [(ngModel)]="category"  type="radio" name="category" value="General" checked>
+          </label>
+          <div id="categoryNameField">{{categoryName}}</div>
+        </div>
+      </div>
+      <hr class="hrAddExpense">
+      <label class="fullWidth descriptionLabel">Description:<br><textarea [(ngModel)]="description" id="descriptionInput" name="description" placeholder="Describe your expense..."></textarea></label><br>
+
+        <input id="submitNewExpense" type="submit" value="Eintragen">
+      </form>
+<!-- TODO: Multiple Flash messages-->
+  </div>
+</div> <!--LEFT SECTION --> <!--  TODO: Flash Messages an verschiedenen Stellen implementieren...über #id vielleicht?-->
+
+
+  <div class="col-md-5" >
+    <h1 class="overviewHeader">Overview</h1>
+    <div id="wrapperGeneralInfo">
+      <div id="currentMonthField">{{ today| date:'MMMM'}}</div>
+      <div id="currentTotalExpensesField">
+        Total <span id="monthTotal">{{monthTotalString}} €</span>
+      </div>
+
+<!--
+      <ul id="legendList">
+        <li *ngFor="let category of categories">
+          <div [ngStyle]="{'background-color': category.color }"></div>
+          <span>{{category.name}}</span><br>
+        </li>
+      </ul> -->
+
+      <ul class="legendList" id="legendList1"> <!-- TODO: GERNERIERN mot SLICE PIPE von angular 0-3 und 4-7-->
+        <li>
+          <div [ngStyle]="{'background-color': categories[0].color }"></div>
+          <span>{{categories[0].name}}</span><br>
+        </li>
+        <li>
+          <div [ngStyle]="{'background-color': categories[1].color }"></div>
+          <span>{{categories[1].name}}</span><br>
+        </li>
+        <li>
+          <div [ngStyle]="{'background-color': categories[2].color }"></div>
+          <span>{{categories[2].name}}</span><br>
+        </li>
+        <li>
+          <div [ngStyle]="{'background-color': categories[3].color }"></div>
+          <span>{{categories[3].name}}</span><br>
+        </li>
+      </ul>
+
+      <ul class="legendList" id="legendList2">
+        <li>
+          <div [ngStyle]="{'background-color': categories[4].color }"></div>
+          <span>{{categories[4].name}}</span><br>
+        </li>
+        <li>
+          <div [ngStyle]="{'background-color': categories[5].color }"></div>
+          <span>{{categories[5].name}}</span><br>
+        </li>
+        <li>
+          <div [ngStyle]="{'background-color': categories[6].color }"></div>
+          <span>{{categories[6].name}}</span><br>
+        </li>
+        <li>
+          <div [ngStyle]="{'background-color': categories[7].color }"></div>
+          <span>{{categories[7].name}}</span><br>
+        </li>
+      </ul>
+
+      <div style="display: block">
+        <canvas id="categoryChart"
+                baseChart #baseChart="base-chart"
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [colors] ="pieChartColor"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+        </canvas>
+      </div> <!--CHART --> <!-- Chart-->
+
+
+
+    <!--  <section>
+        <h3 class="overviewHeader">Fixed Expenses</h3>
+        <hr>
+        <ul>
+          <li><span class="fixkostenName">Wohnung</span><span class="fixkostenBetrag">400 €</span></li>
+          <li><span class="fixkostenName">Creative Cloud</span><span class="fixkostenBetrag">14,65 €</span></li>
+          <li><span class="fixkostenName">Spotify</span><span class="fixkostenBetrag">4,99 €</span></li>
+          <li><span class="fixkostenName">Private Rente</span><span class="fixkostenBetrag">30 €</span></li>
+
+        </ul>
+
+      </section> -->
+    </div> <!--wrapperGeneralInfo END -->
+  </div> <!-- MIDDLE SECTION -->
+
+
+  <div class="col-md-3">
+  <!--  <h2 class="sectionHeader" id="latestExpenseHeader">Latest Expenses  |  Last added</h2>-->
+  <div class="sectionHeader" id="lastLatestHeader" >
+    <span id="latestSpan" (click)="toggleLatestLast(0)" [class.latestActive]="latestActive">Latest <span>Expenses</span></span>
+    <span id="lastSpan" (click)="toggleLatestLast(1)" [class.latestActive]="!latestActive"><span>added</span> Last</span>
+  </div>
+
+  <div class="sectionHeaderNoEntries" *ngIf="tenLatestExpenses.length ==0">No entries yet</div>
+
+
+
+        <div *ngFor="let expense of tenLatestExpenses" class="listItem">
+          <div class="wrapperExpenseListData" (click)="showDescription(expense)" >
+          <div class="expenseCategory">
+              <img [src]="getCategoryIconPath(expense.expenseData.category)"><!-- Images laden - hängt zusammen mit new Expense section -> array needed mit img source ( vielleicht in category array?)-->
+          </div>
+          <div class="expenseData">
+              <span class="expenseCategoryName">{{expense.expenseData.category}}</span>
+              <br>
+              <span class="expenseDate">{{expense.expenseData.date.formatted}}</span>
+          </div>
+          <br>
+          <div class="expenseAmount">{{expense.expenseData.value}} €</div>
+
+          <br>
+          <div class="clearFloat"></div>
+        <div [class.activeInfoCollapse]="expense.shown" class="infoCollapse">
+          <span class="expenseDateCollapse">{{expense.expenseData.date.formatted}}</span>
+          <div class="expenseDescription" >{{expense.expenseData.description}}</div>
+        </div>
+        </div>
+        <div class="wrapperListEdit">
+          <img (click)="clickedEdit(expense)" class="iconEdit" src="resources/icons/icon_edit.png">
+        </div>
+        <div class=clearFloat></div>
+        </div>
+
+
+  </div>
+
+
+  <div *ngIf="modalShown" id="myModal" class="modal" (click)="outerModalClicked()" (window:keypress)="keyDownModalGeneral($event)">
+
+    <!-- Modal content -->
+    <div class="modal-content" (click)="innerModalClicked()">
+
+      <h1 id="headerModalEdit">Edit Expense</h1>
+      <button id="editDeleteButton" (click)="deleteUserExpense(editExpenseId)">Delete Expense</button>
+      <hr class="hrAddExpense">
+
+      <div id="modalForm">
+        <div class="modalInputRow"><label for="editValue">Value</label>          <input (focus)="focusFunctionEditValue()" (blur)="onBlurEditExpenseValue()" (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editValue" id="editValue"></div>
+        <div class="modalInputRow"><label for="editDate">Date</label>            <input (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editDate.formatted" id="editDate"></div>
+
+        <div class="modalInputRow"><label id="modalCategoryLabel" for="editCategory">Category</label>
+          <select [(ngModel)]="editCategory" (ngModelChange)="modalCategoryChanged($event)">
+            <option *ngFor="let category of categories" [ngValue]="category.name" [selected]="editCategory === category.name"   >{{category.name}}</option>
+          </select>
+          <img [src]="editCategoryPath"><br class="clearFloat">
+        </div>
+
+
+        <div class="modalInputRow"><label for="editDescription">Description</label>  <input (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editDescription" id="editDescription"></div>
+      </div>
+
+      <br>
+
+      <button id="cancelModalButton" (click)="closeModal()">Cancel</button>
+      <button id="saveModalButton" (click)="saveExpenseModalClicked()">Save</button>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</div>

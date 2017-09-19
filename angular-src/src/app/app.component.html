@@ -1,0 +1,30 @@
+
+
+<app-navbar></app-navbar>
+
+<div class="containerBox ">
+  <div class="container row"  [class.siteContainerForBackgroundImage]="_compCommunication.onHomeSite">
+  <div  [class.gradientTest]="_compCommunication.onHomeSite"></div>
+    <!--- - - - - - - - - - - - - - - - - - Sidebar---------------------------------------------------------->
+    <div class="col-md-1 no-float height " id="appSidebar" >
+      <app-sidebar *ngIf="authService.loggedIn()"></app-sidebar>
+    </div>
+
+    <!-- - - - - - - - - - - - - - - - - - - Content---------------------------------------------------------->
+    <div class="col-md-11 routedStyle">
+
+
+
+       <flash-messages id="flash"></flash-messages>
+      <router-outlet></router-outlet>
+    </div>
+
+
+  </div>
+</div>
+
+
+<!--
+sidebar nur bei @media >x sonst btns in navbar
+
+-->
