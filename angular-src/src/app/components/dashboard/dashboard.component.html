@@ -151,7 +151,7 @@
   <!--  <h2 class="sectionHeader" id="latestExpenseHeader">Latest Expenses  |  Last added</h2>-->
   <div class="sectionHeader" id="lastLatestHeader" >
     <span id="latestSpan" (click)="toggleLatestLast(0)" [class.latestActive]="latestActive">Latest <span>Expenses</span></span>
-    <span id="lastSpan" (click)="toggleLatestLast(1)" [class.latestActive]="!latestActive"><span>added</span> Last</span>
+    <span id="lastSpan" (click)="toggleLatestLast(1)" [class.latestActive]="!latestActive"><span>Added</span> Last</span>
   </div>
 
   <div class="sectionHeaderNoEntries" *ngIf="tenLatestExpenses.length ==0">No entries yet</div>

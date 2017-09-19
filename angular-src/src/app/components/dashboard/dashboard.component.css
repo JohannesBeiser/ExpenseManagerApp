@@ -18,7 +18,7 @@
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 20px;
-} 
+}
 #wrapperLeftSide input{
   margin-bottom: 20px;
 
@@ -458,15 +458,15 @@
 
 
 #lastSpan{
-  padding-bottom: 5px;
+  padding: 10px 10px 5px 10px;
   position: absolute;
-  bottom:-1px;
+  top: -16px;
   right: 0;
 }
 
 #latestSpan{
   padding: 10px;
-  top:-5px;
+  top:-7px;
 }
 
 
