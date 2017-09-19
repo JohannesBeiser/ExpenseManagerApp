@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   categoryName: String;
   newDate: any;
   currentMonth: any;
+  currentYear: any;
 
   monthTotal: number = 0;
   monthTotalString: string ='';
@@ -108,6 +109,7 @@ export class DashboardComponent implements OnInit {
     this.category ="General"
     this.newDate = new Date();
     this.currentMonth = this.newDate.getMonth()+1;
+    this.currentYear = this.newDate.getFullYear();
     this.updateProfileData();
     this.setCurrentDateToDatepicker();
 }
@@ -361,7 +363,7 @@ public setCurrentDateToDatepicker(){
         this.user= profile.user;
         for(var i=0; i<this.user.expenseData.length; i++){
           for(var j=0; j<this.categories.length; j++){
-            if(this.user.expenseData[i].date.month == this.currentMonth && this.user.expenseData[i].category == this.categories[j].name){
+            if(this.user.expenseData[i].date.month == this.currentMonth && this.user.expenseData[i].date.year==this.currentYear && this.user.expenseData[i].category == this.categories[j].name){
               this.categories[j].amount += parseFloat(this.user.expenseData[i].value); //TODO: topTen implementierendrinnen oder draußen und if aufsplitten als current month für äußere und innen nochmal categorie mit for oder so?
               if(this.monthSortedExpenses.length==0){ //Initial Value if array empty --> First Step
                 this.monthSortedExpenses.splice(0,0,profile.user.expenseData[i]);
