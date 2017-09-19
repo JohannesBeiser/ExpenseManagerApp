@@ -276,6 +276,7 @@ public setCurrentDateToDatepicker(){
         expense.date.day = day;
         expense.date.month = month;
         expense.date.year = dateArr[2];
+        expense.date.formatted = day+"-"+month+"-"+dateArr[2];
 
         //TODO: wenn manuell eingegeben-->checken ob manuell und dann new DAtemodel mit dem formattetem befüllen ...bzw ist ja das dateModel scon durch init als aktuelles datum da...dann muss nur vor der sendung an den server day,month und year gesetzt werden
 
