@@ -65,7 +65,6 @@ export class HomeComponent implements OnInit {
       this.slide2=true;
     }else if(this.slideIndex==2){
       this.slide3=true;
-
     }
 
     for (i = 0; i < this.numberOfSlides; i++) {
@@ -73,6 +72,7 @@ export class HomeComponent implements OnInit {
     }
     dots[this.slideIndex].className += " active";
   }
+
 
   public  currentSlide(n) { // wird durch Dots ausgelöst-->clicks counten und
     var i;
@@ -103,27 +103,28 @@ export class HomeComponent implements OnInit {
       }
   }
 
+
+
   mouseOverSlideshow: boolean=false;
   public enterSlideshow(){
-    this.mouseOverSlideshow = true;
     console.log("entered Slide");
+    this.mouseOverSlideshow = true;
   }
 
   public leaveSlideshow(){
     console.log("left Slide");
     this.leaveCounter++;
+    this.mouseOverSlideshow = false;
     setTimeout(this.callHelper2.bind(this), 7000);
   }
 
   leaveCounter:number=0;
   public callHelper2(){ //hier kommen nur durch events durch einen leave an
-    this.mouseOverSlideshow = false;
-    if(this.leaveCounter==1){
+    if(this.leaveCounter==1 && !this.mouseOverSlideshow){
       console.log("next Slide");
-      if(!this.mouseOverSlideshow){
         this.plusSlides(1);
         this.leaveCounter=0;
-      }
+
     }else{//counter
       this.leaveCounter--;
     }
