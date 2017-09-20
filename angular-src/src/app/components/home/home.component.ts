@@ -30,9 +30,10 @@ export class HomeComponent implements OnInit {
 
 /* Slideshow and Slideshowautimation - Horrible Code-->need for Improvement*/
   slideIndex: number =0;
-  numberOfSlides: number=2;
+  numberOfSlides: number=3;
   slide1: boolean =false;
   slide2: boolean =false;
+  slide3: boolean =false;
 
   public  plusSlides(n) {
     this.slideIndex = this.slideIndex +n;
@@ -56,11 +57,15 @@ export class HomeComponent implements OnInit {
     var dots = document.getElementsByClassName("dot");
     this.slide1=false;
     this.slide2=false;
+    this.slide3=false;
 
     if(this.slideIndex==0){
       this.slide1=true;
     }else if(this.slideIndex==1){
       this.slide2=true;
+    }else if(this.slideIndex==2){
+      this.slide3=true;
+
     }
 
     for (i = 0; i < this.numberOfSlides; i++) {
@@ -75,11 +80,14 @@ export class HomeComponent implements OnInit {
     var dots = document.getElementsByClassName("dot");
     this.slide1=false;
     this.slide2=false;
+    this.slide3=false;
 
     if(n==0){
       this.slide1=true;
     }else if(n==1){
       this.slide2=true;
+    }else if(n==2){
+      this.slide3=true;
     }
 
     for (i = 0; i < this.numberOfSlides; i++) {
@@ -127,11 +135,14 @@ export class HomeComponent implements OnInit {
     var dots = document.getElementsByClassName("dot");
     this.slide1=false;
     this.slide2=false;
+    this.slide3=false;
 
     if(n==0){
       this.slide1=true;
     }else if(n==1){
       this.slide2=true;
+    }else if(n==2){
+      this.slide3=true;
     }
 
     for (i = 0; i < this.numberOfSlides; i++) {
