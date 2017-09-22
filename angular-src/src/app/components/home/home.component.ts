@@ -124,7 +124,7 @@ export class HomeComponent implements OnInit {
       console.log("next Slide");
         this.plusSlides(1);
         this.leaveCounter=0;
-// change in Master
+
     }else{//counter
       this.leaveCounter--;
     }
