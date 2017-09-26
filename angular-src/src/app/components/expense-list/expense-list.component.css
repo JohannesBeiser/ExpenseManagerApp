@@ -1,0 +1,89 @@
+hr{
+  border-color: #444;
+  margin: 0;
+}
+h1{
+  font-size: 32px;
+}
+
+
+.dataListWrapper{
+  border: 1px solid #444;
+  padding: 0;
+  margin: 0;
+}
+
+.dataListWrapper div{
+  padding: 0;
+  margin: 0;
+}
+.dataListWrapper>div:last-child{
+  border: none;
+}
+
+.dataListItem{
+  border-bottom: 1px solid #444;
+  font-size: 18px;
+  height: 3em;
+  background-color: #DDDDDD;
+  transition: background-color 0.2s ;
+}
+
+.infoColumn{
+  height: 100%;
+}
+.dataListItem:hover{
+  background-color: #eee;
+}
+
+
+.categoryIcon{
+  float: left;
+  width: 10%;
+  height: 100%;
+  background: red;
+}
+.expenseValue{
+  float: left;
+  width: 20%;
+  height: 100%;
+  font-size: 1.5em;
+  text-align: center;
+}
+.expenseValue>div{
+  margin-top: 0.4em;
+}
+
+
+.expenseDate{
+  float: left;
+  width: 20%;
+  height: 100%;
+  background: orange;
+}
+.expenseDescription{
+  float: left;
+  width: 45%;
+  height: 100%;
+  background: blue;
+}
+
+
+
+.editColumn{
+  height: 100%;
+}
+.editColumn img{
+  width: 60%;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 5%;
+}
+
+.editColumn img:hover{
+    width: 65%;
+}
+
+.editColumn>div{
+  margin-top: 0.3em;
+}

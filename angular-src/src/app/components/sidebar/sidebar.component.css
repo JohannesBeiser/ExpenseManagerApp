@@ -21,6 +21,20 @@
   margin-top: 35%;
 }
 
+
+#expensList{
+  margin-top: 5%;
+}
+
+#expenseListSpan{
+  position: relative;
+  bottom: 5px;
+}
+#statisticsLink{
+  position: relative;
+  bottom: 12px;
+}
+
 #dashboard{
   margin-top: 5%;
 }
@@ -59,6 +73,14 @@
   width: 80%;
 }
 
+.icon3{
+  fill: #DDDDDD;
+}
+
+.activeIcon3{
+  fill: #F8B195;
+}
+
 .icon-link:hover>span{
   opacity: 1;
   color: #F8B195;
@@ -66,6 +88,9 @@
 
 .icon-link:hover>svg>.icon1{
   fill: #F8B195;
+}
+.icon-link:hover .icon3{
+  fill: #F8B195 !important;
 }
 
 

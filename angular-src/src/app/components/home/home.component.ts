@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
                 private router: Router
   ) {
     this._compCommunication.activateHomeSite();
-
  }
 
   ngOnInit() {
@@ -25,23 +24,23 @@ export class HomeComponent implements OnInit {
     this.autoRollSlideshow();
   }
 
-
-
-
-
-/* Slideshow and Slideshowautimation - Horrible Code-->need for Improvement*/
   slideIndex: number =0;
   numberOfSlides: number=3;
   slide1: boolean =false;
   slide2: boolean =false;
   slide3: boolean =false;
 
+
+/**
+* Increnemts or Decrements current active slide depending on:
+* @param {number} n - either -1 or +1 :
+*/
   public  plusSlides(n) { // in- or decrements slideIndex
     this.slideIndex = this.slideIndex +n;
     if(this.slideIndex<0){
-      this.slideIndex= this.numberOfSlides-1; // wenn zurückÜberlauf-->springe ans ende
+      this.slideIndex= this.numberOfSlides-1;
     }else if(this.slideIndex>this.numberOfSlides-1){
-      this.slideIndex=0; // Wenn weiterÜberlauf-->sprnge zum anfang
+      this.slideIndex=0;
     }
     this.showSlides(this.slideIndex);
   }

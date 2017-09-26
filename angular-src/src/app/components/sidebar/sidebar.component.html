@@ -1,7 +1,7 @@
 <div class="row onTop">
   <div class="col-md-9 clearMargPad sidebar">
 
-    <ul id="sideNavbar">
+    <ul id="sideNavbar"> <!-- TODO: Bei initSite jeweils compCommunication icon und link aktivieren -->
       <li (click)="_compCommunicationService.activateDashboard()" (click) ="_compCommunicationService.deactivateHomeSite()">
         <a  class="icon-link" [routerLink]="['/dashboard']">
           <svg class="icon icon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -12,7 +12,23 @@
       </li>
 
 
-      <li (click)="_compCommunicationService.activateStatistics()" (click) ="_compCommunicationService.deactivateHomeSite()">
+      <li id="expensList"(click)="_compCommunicationService.activateExpenseList()" (click) ="_compCommunicationService.deactivateHomeSite()">
+        <a  class="icon-link" [routerLink]="['/expenseList']">
+          <svg class="icon" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
+            <g class="icon3" [class.activeIcon3]="_compCommunicationService.expenseListActive" >
+              <circle cx="4" cy="4" r="4"/>
+              <circle cx="4" cy="20" r="4"/>
+              <circle cx="4" cy="36" r="4"/>
+              <circle cx="4" cy="52" r="4"/>
+              <path d="M13 1h40v6H13zM13 17h40v6H13zM13 33h40v6H13zM13 49h40v6H13z"/>
+            </g>
+          </svg>
+          <span id="expenseListSpan" [class.activeSpan]="_compCommunicationService.expenseListActive">Expense List</span>
+        </a>
+      </li>
+
+
+      <li id="statisticsLink" (click)="_compCommunicationService.activateStatistics()" (click) ="_compCommunicationService.deactivateHomeSite()">
         <a  class="icon-link" [routerLink]="['/statistics']">
           <svg class="icon icon2" xmlns="http://www.w3.org/2000/svg" id="Layer_3" data-name="Layer 3" viewBox="0 0 32 32">
             <path [class.activeIcon2]="_compCommunicationService.statisticsActive" d="M15 9h11M6 9h3m14 7h3M6 16h11m0 7h9M6 23h5" class="cls-1"/>
