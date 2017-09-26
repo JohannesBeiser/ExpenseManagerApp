@@ -19,9 +19,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this._compCommunication.activateHomeSite();
-    this.slideIndex = 0;
+    this.slideIndex = -1;
     this.slide1=true;
-    this.showSlides(this.slideIndex);
+
+    this.autoRollSlideshow();
   }
 
 
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
   slide2: boolean =false;
   slide3: boolean =false;
 
-  public  plusSlides(n) {
+  public  plusSlides(n) { // in- or decrements slideIndex
     this.slideIndex = this.slideIndex +n;
     if(this.slideIndex<0){
       this.slideIndex= this.numberOfSlides-1; // wenn zurückÜberlauf-->springe ans ende
@@ -43,34 +44,6 @@ export class HomeComponent implements OnInit {
       this.slideIndex=0; // Wenn weiterÜberlauf-->sprnge zum anfang
     }
     this.showSlides(this.slideIndex);
-  }
-
-  public  plusSlidesWithoutRecursive(n) {
-    this.slideIndex = this.slideIndex +n;
-    if(this.slideIndex<0){
-      this.slideIndex= this.numberOfSlides-1; // wenn zurückÜberlauf-->springe ans ende
-    }else if(this.slideIndex>this.numberOfSlides-1){
-      this.slideIndex=0; // Wenn weiterÜberlauf-->sprnge zum anfang
-    }
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-    this.slide1=false;
-    this.slide2=false;
-    this.slide3=false;
-
-    if(this.slideIndex==0){
-      this.slide1=true;
-    }else if(this.slideIndex==1){
-      this.slide2=true;
-    }else if(this.slideIndex==2){
-      this.slide3=true;
-    }
-
-    for (i = 0; i < this.numberOfSlides; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    dots[this.slideIndex].className += " active";
   }
 
 
@@ -96,41 +69,28 @@ export class HomeComponent implements OnInit {
     dots[n].className += " active";
    }
 
-  public callHelper(){
-      console.log("next Slide");
-      if(!this.mouseOverSlideshow){
+   slideshowRolling : boolean = true;
+   public autoRollSlideshow(){
+      if(this.slideshowRolling){
         this.plusSlides(1);
+        this.showSlides(this.slideIndex)
       }
-  }
+      setTimeout(this.autoRollSlideshow.bind(this), 7000);
+   }
 
 
 
-  mouseOverSlideshow: boolean=false;
   public enterSlideshow(){
-    console.log("entered Slide");
-    this.mouseOverSlideshow = true;
+    this.slideshowRolling = false;
   }
 
   public leaveSlideshow(){
-    console.log("left Slide");
-    this.leaveCounter++;
-    this.mouseOverSlideshow = false;
-    setTimeout(this.callHelper2.bind(this), 7000);
+    this.slideshowRolling = true;
   }
 
-  leaveCounter:number=0;
-  public callHelper2(){ //hier kommen nur durch events durch einen leave an
-    if(this.leaveCounter==1 && !this.mouseOverSlideshow){
-      console.log("next Slide");
-        this.plusSlides(1);
-        this.leaveCounter=0;
-// Develop Branch Created
-    }else{//counter
-      this.leaveCounter--;
-    }
-  }
 
-  public  showSlides(n) {
+
+  public  showSlides(n) { //sets the current slide as active and deactivates the others
     var i;
     var slides = document.getElementsByClassName("mySlides");
     var dots = document.getElementsByClassName("dot");
@@ -151,7 +111,7 @@ export class HomeComponent implements OnInit {
     }
     dots[this.slideIndex].className += " active";
 
-    setTimeout(this.callHelper.bind(this), 7000);
+    //setTimeout(this.callHelper.bind(this), 7000);
 
   }
 
