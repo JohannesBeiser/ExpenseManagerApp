@@ -45,6 +45,35 @@ export class HomeComponent implements OnInit {
     this.showSlides(this.slideIndex);
   }
 
+  public  plusSlidesWithoutRecursive(n) {
+    this.slideIndex = this.slideIndex +n;
+    if(this.slideIndex<0){
+      this.slideIndex= this.numberOfSlides-1; // wenn zurückÜberlauf-->springe ans ende
+    }else if(this.slideIndex>this.numberOfSlides-1){
+      this.slideIndex=0; // Wenn weiterÜberlauf-->sprnge zum anfang
+    }
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    this.slide1=false;
+    this.slide2=false;
+    this.slide3=false;
+
+    if(this.slideIndex==0){
+      this.slide1=true;
+    }else if(this.slideIndex==1){
+      this.slide2=true;
+    }else if(this.slideIndex==2){
+      this.slide3=true;
+    }
+
+    for (i = 0; i < this.numberOfSlides; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    dots[this.slideIndex].className += " active";
+  }
+
+
 
   public  currentSlide(n) { // wird durch Dots ausgelöst-->clicks counten und
     var i;
