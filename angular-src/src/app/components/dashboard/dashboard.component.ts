@@ -35,57 +35,11 @@ export class DashboardComponent implements OnInit {
 
   user: any;
 
-  categories = [   // TODO: Farbenerst bei hover original - davor entsättigt
-    { name: 'Food',
-      color: '#607D8A',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Food.png'
-    },
-    {
-      name: 'Transport',
-      color: '#A5A8AA',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Transport.png'
-    },
-    {
-      name: 'Accommodation',
-      color: '#FFCD34',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Accomodation.png'
-    },
-    {
-      name: 'Leisure',
-      color: '#92CD00',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Leisure2.png'
-    },
-    {
-      name: 'Multimedia',
-      color:  '#b14947',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Multimedia.png'
-    },
-    {
-      name: 'Insurance & Health',
-      color: '#fb8c00',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Insurance.png'
+  categories = this._compCommunicationService.categories; // TODO: Farbenerst bei hover original - davor entsättigt
+  categoriesActiveArray: any[] = [];
 
-    },
-    {
-      name: 'Clothing & Hygiene',
-      color: '#645F5D',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Clothing.png'
-    },
-    {
-      name: 'General',
-      color: '#444444',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_General2.png'
 
-    }
-  ];
+
 
   @ViewChild("baseChart")
   chart: BaseChartDirective;
@@ -112,6 +66,12 @@ export class DashboardComponent implements OnInit {
     this.currentYear = this.newDate.getFullYear();
     this.updateProfileData();
     this.setCurrentDateToDatepicker();
+
+
+    for(var i=0; i<this.categories.length;i++){
+      this.categoriesActiveArray.push(false);
+    }
+    this.categoriesActiveArray[this.categories.length-1]=true;
 }
 
 
@@ -187,8 +147,12 @@ public setCurrentDateToDatepicker(){
     console.log(e);
   }
 
-  public setCategoryName(value: string){
+  public setCategoryName(value: string, index: number){
     this.categoryName = value;
+    for(var i=0; i<this.categoriesActiveArray.length;i++){
+      this.categoriesActiveArray[i]=false;
+    }
+    this.categoriesActiveArray[index]=true;
   }
 
   value: any;
@@ -250,7 +214,7 @@ public setCurrentDateToDatepicker(){
         const expense ={
             expenseId: profile.user.nextExpenseDataId,
             value: this.value,
-            category: this.category,
+            category: this.categoryName,
             date: this.datepickerDate,
             description: this.description
         };

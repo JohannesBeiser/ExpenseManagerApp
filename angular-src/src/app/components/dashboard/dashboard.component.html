@@ -17,38 +17,13 @@
       <hr class="hrAddExpense" style="margin-top: 5%">
       <div id="categoryOptionFields"> <!--TODO: Generate with *ngFor to enable to easily add a category later on-->
           <div id="categoryWrapper">
-          <label class="categoryLabel" (click)="setCategoryName('Food')">
-            <img [src]="categories[0].iconPath">
-            <input [(ngModel)]="category" type="radio" name="category" value="Food">
-          </label>
-          <label class="categoryLabel" (click)="setCategoryName('Transport')">
-            <img [src]="categories[1].iconPath">
-            <input [(ngModel)]="category"  type="radio" name="category" value="Transport">
-          </label>
-          <label class="categoryLabel" (click)="setCategoryName('Accommodation')">
-            <img [src]="categories[2].iconPath">
-            <input [(ngModel)]="category"  type="radio" name="category" value="Accommodation">
-          </label>
-          <label class="categoryLabel" (click)="setCategoryName('Leisure')">
-            <img [src]="categories[3].iconPath">
-            <input [(ngModel)]="category"  type="radio" name="category" value="Leisure">
-          </label>
-          <label class="categoryLabel" (click)="setCategoryName('Multimedia')">
-            <img [src]="categories[4].iconPath">
-            <input [(ngModel)]="category"  type="radio" name="category" value="Multimedia" >
-          </label>
-          <label class="categoryLabel" (click)="setCategoryName('Insurance & Health')">
-            <img [src]="categories[5].iconPath">
-            <input [(ngModel)]="category"  type="radio" name="category" value="Insurance & Health" >
-          </label>
-          <label class="categoryLabel" (click)="setCategoryName('Clothing & Hygiene')">
-            <img [src]="categories[6].iconPath">
-            <input [(ngModel)]="category"  type="radio" name="category" value="Clothing & Hygiene" >
-          </label>
-          <label class="categoryLabel" (click)="setCategoryName('General')">
-            <img [src]="categories[7].iconPath">
-            <input [(ngModel)]="category"  type="radio" name="category" value="General" checked>
-          </label>
+
+          <div *ngFor="let category of categories; let i=index">
+            <label class="categoryLabel" (click)="setCategoryName(category.name, i)">
+              <img [src]="category.iconPath" [class.categoryImageActive]="categoriesActiveArray[i]">
+            </label>
+          </div>
+
           <div id="categoryNameField">{{categoryName}}</div>
         </div>
       </div>

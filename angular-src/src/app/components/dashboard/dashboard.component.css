@@ -51,6 +51,9 @@
   width: 80%;
   margin: 0 auto;
 }
+#categoryWrapper>div{
+  display: inline;
+}
 
 #valueInput{
   font-size: 22px;
@@ -61,6 +64,7 @@
 
 
 #categoryNameField{
+  display: block !important;
   text-align: center !important;
   margin: 10px 0 0 0;
   font-family: PrimeLight;
@@ -72,12 +76,15 @@
   bottom: 0;
   transition: bottom 0.15s ease-in-out;
   cursor: pointer;
-
 }
 .categoryLabel>img:hover{
   bottom: 7px;
-
 }
+.categoryImageActive{
+  border: 2px solid #666;
+  border-radius: 25px;
+}
+
 .categoryLabel>input{
   display: none;
 }

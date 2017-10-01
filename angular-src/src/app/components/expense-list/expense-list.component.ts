@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from'../../services/auth.service';
+import {ComponentCommunicationService} from '../../services/component-communication.service'
 
 @Component({
   selector: 'app-expense-list',
@@ -8,64 +9,16 @@ import {AuthService} from'../../services/auth.service';
 })
 export class ExpenseListComponent implements OnInit {
 
-  constructor(private authService : AuthService) { }
+  constructor(private authService : AuthService,
+              private _compCommunicationService : ComponentCommunicationService
+  ) { }
 
   ngOnInit() {
       this.loadUnfilteredList();
-
+      this.filterList();
   }
 
-  categories = [   // TODO: Farbenerst bei hover original - davor entsättigt
-    { name: 'Food',//TODO: code auslagern in service da auch von dasboard benötigt und andere
-      color: '#607D8A',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Food.png'
-    },
-    {
-      name: 'Transport',
-      color: '#A5A8AA',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Transport.png'
-    },
-    {
-      name: 'Accommodation',
-      color: '#FFCD34',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Accomodation.png'
-    },
-    {
-      name: 'Leisure',
-      color: '#92CD00',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Leisure2.png'
-    },
-    {
-      name: 'Multimedia',
-      color:  '#b14947',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Multimedia.png'
-    },
-    {
-      name: 'Insurance & Health',
-      color: '#fb8c00',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Insurance.png'
-
-    },
-    {
-      name: 'Clothing & Hygiene',
-      color: '#645F5D',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Clothing.png'
-    },
-    {
-      name: 'General',
-      color: '#444444',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_General2.png'
-
-    }
-  ];
+  categories = this._compCommunicationService.categories;
 
   public getCategoryIconPath(categoryName: string) : string{ //FIXME:wird wiederholt abgefragt weil angular auch änderung checkt //TODO: wird wiederholt abgefragt weil angular auch änderung checkt
     var path: string = '';
@@ -78,8 +31,8 @@ export class ExpenseListComponent implements OnInit {
     return path;
   }
 
-expenseDescriptionShown: boolean =false;
 unfilteredExpenselist: any[] =[];
+filteredList : any[] =[];
 user: any;
 
 public loadUnfilteredList(){
@@ -101,9 +54,20 @@ public loadUnfilteredList(){
     });
 }
 
+public filterList(){
+  this.filteredList = this.unfilteredExpenselist;
+}
 
-public showFullDescription(){
-  this.expenseDescriptionShown =true;
+
+public showFullDescription(expense :any){
+  if(expense.descriptionShown){
+    expense.descriptionShown = false;
+  }else{
+    for(var i=0; i<this.unfilteredExpenselist.length;i++){
+      this.unfilteredExpenselist[i].descriptionShown = false;
+    }
+    expense.descriptionShown =true;
+  }
 }
 
 
