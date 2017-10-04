@@ -428,7 +428,7 @@ public setCurrentDateToDatepicker(){
   editDescription: string ="";
   editExpenseId: number;
 
-  modalShown: boolean =false;
+  modalShown: boolean =false; //TODO: When editing descriptiona dne emptying it, setting to " - no description available -"
   public clickedEdit(expense){
     this.editValue= expense.expenseData.value + " €";
     this.editDate= expense.expenseData.date;

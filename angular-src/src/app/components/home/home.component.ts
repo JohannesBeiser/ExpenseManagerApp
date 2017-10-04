@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
         this.plusSlides(1);
         this.showSlides(this.slideIndex)
       }
-      setTimeout(this.autoRollSlideshow.bind(this), 7000);
+      setTimeout(this.autoRollSlideshow.bind(this), 10000);
    }
 
 

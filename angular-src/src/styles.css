@@ -7,11 +7,14 @@
   font-family: PrimeRegular;
 }
 
-html,body{
+html{
   background-color: #EEEEEE;
   height: 100%;
 }
-
+body{
+  background-color: #eeeeee;
+  /*height: 100%;*/
+}
 
 .datepicker-container,  .datepicker-input-container{
   width: 100% !important;

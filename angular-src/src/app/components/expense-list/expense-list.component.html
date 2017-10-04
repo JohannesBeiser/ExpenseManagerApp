@@ -7,9 +7,15 @@
   </div>
   <div class="expenseDataArea col-md-8"> <!--Entry Area -->
     <h1>Expense List</h1>
+    <div id="dataListHead">
+      <div class="headNr"><div>Nr.</div></div>
+      <div class="headCategory" (click)="sortCategory()"><div [class.floatingSortHeader]="sortedCategory">Category</div><span [class.dropup]="sortedCategoryAscending"><span [class.caret]="sortedCategory"></span></span></div>
+      <div class="headAmount" (click)="sortAmount()"><div [class.floatingSortHeader]="sortedAmount">Amount</div><span [class.dropup]="sortedAmountAscending"><span [class.caret]="sortedAmount"></span></span></div>
+      <div class="headDate" (click)="sortDate()"><div [class.floatingSortHeader]="sortedDate">Date</div><span [class.dropup]="sortedDateAscending"><span [class.caret]="sortedDate"></span></span></div>
+      <div class="headDescription" (click)="sortDescription()"><div [class.floatingSortHeader]="sortedDescription">Description</div><span [class.caret]="sortedDescription"></span></div>
+    </div>
     <div class="dataListWrapper" *ngIf="user">
-
-      <div *ngFor="let expense of filteredList; let i=index" class="dataListItem row">
+      <div *ngFor="let expense of sortedList; let i=index" class="dataListItem row">
         <div class="infoColumn col-md-11" (click)="showFullDescription(expense)">
             <div class="expenseNumber"><div>{{i+1}}</div></div> <!-- TODO: has to be index of ngFor instead of expenseId  BUG: CSS-Bug floating div has fixed height that fits the macbook screen but has tu actually be at a 100% -->
             <div class="categoryIcon"><img [src]="getCategoryIconPath(expense.expenseData.category)" alt="category icon"></div>
@@ -30,15 +36,18 @@
 
 TODO:
 <hr>
-Process: Design-->generate all--->limit number from all by filter
+Process: Design-->generate all--->limit number from all by filter-->allow sort on the filtered
 <hr>
 <div style="font-size:2em">Feature to add here:
 <ul >
   <li>Overview of the a total months expense -->purpose is to find, manage, edit and delete entries</li>
-  <li>Filters possible (Category, Month, specific Day)</li>
+  <li>Filters possible (Category, Month, year, (specific Day ?) )</li>
+  <li>category is parallel to month OR year</li>
+  <li>standard filter is just everything with a limited amount of entries...see idea below (same)</li>
   <li>NO Charts etc. Total amounts should be calculated for all entries together which accord with the filters</li>
-  <li>Maybe several columns? --> In need for a good solution for the view... </li>
-  <li>Another Menu Item needed where all of this is actually added...Statistics is actually another page with fixed settings calculated charts etc... </li>
-  <li> This page will be named somewhat like "Datalist"</li>
+  <li>Solution for the View: Only show x entries with x around 50-100 and allow "show more" </li>
+  <li>Allow Sort asc/desc date and amount</li>
+  <li>Allow two view Options: 1.General/Normal mode which just shiows the full list and 2. Category which shows a list for each category</li>
+
 </ul>
 </div>

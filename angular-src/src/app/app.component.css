@@ -1,3 +1,5 @@
+
+
 .routedStyle{
   color: #222;
 }
@@ -36,6 +38,7 @@
 
 
   .siteContainerForBackgroundImage{
+    height: 100vh;
     background-image: url("resources/expenseBackground.jpg");
     background-size: cover;
   }
