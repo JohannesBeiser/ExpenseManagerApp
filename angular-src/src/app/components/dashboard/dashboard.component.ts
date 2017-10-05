@@ -467,7 +467,13 @@ public setCurrentDateToDatepicker(){
         date: this.editDate,
         description: this.editDescription
     };
+
+
 /* ***********************  PRE FORMATTING    ******************************* */
+
+if(expense.description=="" || expense.description==undefined){
+    expense.description="- no description available -";
+}
     var splitterChar: string = "-";
     var seperatorIndex = expense.date.formatted.length -5;
     splitterChar = expense.date.formatted.charAt(seperatorIndex);

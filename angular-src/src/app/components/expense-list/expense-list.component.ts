@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from'../../services/auth.service';
 import {ComponentCommunicationService} from '../../services/component-communication.service'
+import {FlashMessagesService} from 'angular2-flash-messages';
+import { DatePickerOptions, DateModel } from 'ng2-datepicker';
+
+import {ValidateService} from '../../services/validate.service';
+
+
 
 @Component({
   selector: 'app-expense-list',
@@ -10,7 +16,10 @@ import {ComponentCommunicationService} from '../../services/component-communicat
 export class ExpenseListComponent implements OnInit {
 
   constructor(private authService : AuthService,
-              private _compCommunicationService : ComponentCommunicationService
+              private validateService: ValidateService,
+              private _compCommunicationService : ComponentCommunicationService,
+              private flashMessage: FlashMessagesService
+
   ) { }
 
   ngOnInit() {
@@ -23,6 +32,7 @@ export class ExpenseListComponent implements OnInit {
   sortedCategoryAscending: boolean = false; //is actually ascending, but arrow would be reversed, so user does see same direction arrow on first click but category is sorted from 0-->i not i-->0 (as initial value)
   sortedAmountAscending : boolean = false;
   sortedDateAscending : boolean = false;
+  sortedDescriptionAscending: boolean =false;
 
   sortedCategory :boolean = false;
   sortedAmount :boolean = false;
@@ -127,9 +137,9 @@ public sortEntries(){
             var sortedBorder=this.sortedList.length;
 
             for(var j=0; j<sortedBorder;j++){// ...iterate through all of the already sorted entries...
-              var newDescription = this.unfilteredExpenselist[i].expenseData.description;
-
-              if(newDescription == "- no description available -" || newDescription == ""){
+              var newDescription = this.unfilteredExpenselist[i].expenseData.description.charAt(0);
+              var comparingToDescription = this.sortedList[j].expenseData.description.charAt(0);
+              if(newDescription<=comparingToDescription){
                 this.sortedList.splice(j,0,this.unfilteredExpenselist[i]);
                 break;
               }
@@ -139,6 +149,10 @@ public sortEntries(){
               }
             }
         }
+    }
+
+    if(this.sortedDescriptionAscending){
+      this.sortedList.reverse();
     }
   }
 }
@@ -183,8 +197,13 @@ public sortEntries(){
     this.sortEntries();
   }
   public sortDescription(){ // only sets parameters,then calls a sort() method which sorts according to settings
-    this.deactivateSortAll();
-    this.sortedDescription=true;
+    if(this.sortedDescription){
+      this.sortedDescriptionAscending = !this.sortedDescriptionAscending;
+    }else{
+      this.deactivateSortAll();
+      this.sortedDescription=true;
+      this.sortedDescriptionAscending = false; //initial value
+    }
     this.sortEntries();
   }
 
@@ -237,6 +256,211 @@ public showFullDescription(expense :any){
     expense.descriptionShown =true;
   }
 }
+
+
+
+
+
+/* ********************     MODAL   ************************* */
+public updateProfileData(){
+  this.unfilteredExpenselist= [];
+  this.loadUnfilteredList()
+}
+
+
+
+
+
+public formatValue(oldValue){// takes any value and converts it to "x.xx"
+  if (oldValue==null || oldValue==undefined || oldValue=="" || oldValue.match(/[a-z]/i)) {
+    console.log("no formatting")
+    oldValue=undefined;
+    return oldValue;
+  }
+
+  console.log("formatiere:"+oldValue +".")
+if(oldValue.indexOf('€')>-1){// IF EURO Char in Value-->remove € and Space
+  oldValue= oldValue.replace(/€/g , "");
+  oldValue= oldValue.replace(/ /g , "");
+}
+
+if(oldValue.indexOf(',')>-1){ //Searching for Commas and converts it to Dots
+  oldValue= oldValue.replace(/,/g , ".")
+}
+if(oldValue.indexOf('.')==-1){// IF no Dot exists-->add one to the end
+  oldValue= oldValue + "."
+}
+
+var decimalPlace = oldValue.length-1 - oldValue.indexOf('.');
+var counter =2; // max Zeros to add--> Loop iterates 2-0 times depending on DecimalPlace
+while(counter>decimalPlace){
+  oldValue = oldValue+ "0";
+  counter--;
+}
+  return oldValue;
+}
+
+
+
+  editValue: string ="";
+  editDate: DateModel;
+  editCategory: string ="";
+  editCategoryPath: string ="";
+  editDescription: string ="";
+  editExpenseId: number;
+
+  modalShown: boolean =false; //TODO: When editing descriptiona dne emptying it, setting to " - no description available -"
+  public clickedEdit(expense){
+    this.editValue= expense.expenseData.value + " €";
+    this.editDate= expense.expenseData.date;
+    this.editCategory= expense.expenseData.category;
+    this.editCategoryPath= this.getCategoryIconPath(expense.expenseData.category)
+    this.editDescription= expense.expenseData.description;
+    this.editExpenseId= expense.expenseData.expenseId;
+    this.modalShown=true; //Opens Modal Box
+
+  }
+
+
+
+
+  public saveExpenseModalClicked(){
+    this.editValue = this.formatValue(this.editValue);
+
+    const expense ={
+        expenseId: this.editExpenseId,
+        value: this.editValue,
+        category: this.editCategory,
+        date: this.editDate,
+        description: this.editDescription
+    };
+
+    if(expense.description=="" || expense.description==undefined){
+        expense.description="- no description available -";
+    }
+/* ***********************  PRE FORMATTING    ******************************* */
+    var splitterChar: string = "-";
+    var seperatorIndex = expense.date.formatted.length -5;
+    splitterChar = expense.date.formatted.charAt(seperatorIndex);
+    var dateArr = expense.date.formatted.split(splitterChar);
+    var day= dateArr[0];
+    var month = dateArr[1];
+    if(day.length==1){
+        day = "0" + day;
+    }
+    if(month.length==1){
+      month = "0" + month
+    }
+
+    expense.date.day = day;
+    expense.date.month = month;
+    expense.date.year = dateArr[2];
+
+
+if(expense.value != undefined ){
+  if(expense.value.indexOf(',')>-1){
+
+    expense.value = expense.value.replace(/,/g , ".")
+  }
+}
+
+/* ********************       Validating        ************************** */
+    if(!this.validateService.validateExpenseValue(expense)){
+      this.flashMessage.show("Please fill in a value", {cssClass: 'alert-danger', timeout:3000});
+      console.log('value false');
+      return false;
+    }
+
+    if(!this.validateService.validateExpenseDate(expense)){
+      this.flashMessage.show("Please fill in a date", {cssClass: 'alert-danger', timeout:3000});
+      console.log('date false');
+      return false;
+    }
+
+    this.authService.editUserExpenses(expense).subscribe(data =>{
+        if(data.success){
+          this.closeModal();
+          this.flashMessage.show("Expense edited", {cssClass: 'alert-success', timeout:1500});
+          this.updateProfileData();
+        }else{
+          this.flashMessage.show("Failed to edit Expense", {cssClass: 'alert-danger', timeout:1500});
+        }
+      });
+  }
+
+  innerModal: boolean =false;
+
+  public outerModalClicked(){
+  if(this.innerModal){
+    this.innerModal=false;
+  }else{ //Close Modal if Clicked "outside" the Modal
+    this.saveExpenseModalClicked();
+  }
+
+  }
+
+  public innerModalClicked(){
+    this.innerModal=true;
+  }
+
+  public keyDownModalEdit(event) {
+    if(event.keyCode == 13) {//ENTER pressed
+      this.saveExpenseModalClicked();
+    }
+
+  }
+
+  public keyDownModalGeneral(event) {
+    var x = event.keyCode;
+    if (x == 27) {  // 27 is the ESC key
+        alert ("You pressed the Escape key!");
+    }
+  }
+
+
+  public modalCategoryChanged(eventItem) {
+    this.editCategoryPath  = this.getCategoryIconPath(eventItem);
+  }
+
+ public onBlurEditExpenseValue(){
+   if(this.editValue ==undefined || this.editValue == ""){
+
+   }else if(!this.editValue.match(/[a-z]/i)){
+     this.editValue = this.formatValue(this.editValue) + " €" ;
+   }
+ }
+
+ public focusFunctionEditValue(){
+   this.editValue = this.formatValue(this.editValue);
+ }
+
+
+
+
+   public closeModal(){
+     this.modalShown=false;
+   }
+
+
+
+
+
+    public deleteUserExpense(index){
+
+    //  var r = confirm("Are you sure you want to DELETE this expense");
+  //    if (r == true) {
+        this.authService.deleteUserExpense(index).subscribe(data =>{
+            if(data.success){
+              this.flashMessage.show("Expense deleted", {cssClass: 'alert-success', timeout:1500});
+              this.updateProfileData();
+            }else{
+              this.flashMessage.show("Failed to delete Expense", {cssClass: 'alert-danger', timeout:1500});
+            }
+          });
+          this.closeModal();
+      }
+
+
 
 
 }

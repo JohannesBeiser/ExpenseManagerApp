@@ -183,6 +183,113 @@ cursor: pointer;
 }
 
 
+
+
+/* ***************************   MODAL *************************** */
+
+/* The Modal (background) */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #DDDDDD;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+#editDeleteButton{
+  position: absolute;
+  top: 5%;
+  right: 7%;
+  line-height: 2em;
+  background-color: #CE4441;
+}
+#editDeleteButton:hover{
+  background-color: #C9302C;
+}
+
+#saveModalButton{
+  background-color:  #A0C47D;
+  float: right;
+  line-height: 3em;
+  min-width: 20%;
+}
+#saveModalButton:hover{
+  background-color:  #78AB46;
+}
+
+#cancelModalButton{
+  line-height: 3em;
+  min-width: 20%;
+}
+
+#modalForm{
+  margin-top: 5%;
+}
+
+#modalForm input{
+  line-height: 2em;
+  background-color: #eee;
+  border: 1px solid #888;
+  width: 25%;
+  padding:0 5px;
+}
+#modalForm select{
+  height: 2.25em;
+  width: 26%;
+  background-color: #eee;
+  padding:0 5px;
+}
+
+
+#modalForm label{
+  width: 20%;
+}
+
+#modalForm img{
+  margin-right: 0.5%;
+  width: 2.48em;
+}
+
+
+#modalCategoryLabel{
+  float: left;
+}
+
+.modalInputRow{
+  line-height: 3em;
+}
+
+#headerModalEdit{
+  font-size: 2em;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 2.5%;
+}
+
+#editCategory{
+  float: left;
+  margin-right: 1%;
+}
+
+
 /*
 .caret{
       border-top: 8px solid #333;

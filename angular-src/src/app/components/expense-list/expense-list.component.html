@@ -12,7 +12,7 @@
       <div class="headCategory" (click)="sortCategory()"><div [class.floatingSortHeader]="sortedCategory">Category</div><span [class.dropup]="sortedCategoryAscending"><span [class.caret]="sortedCategory"></span></span></div>
       <div class="headAmount" (click)="sortAmount()"><div [class.floatingSortHeader]="sortedAmount">Amount</div><span [class.dropup]="sortedAmountAscending"><span [class.caret]="sortedAmount"></span></span></div>
       <div class="headDate" (click)="sortDate()"><div [class.floatingSortHeader]="sortedDate">Date</div><span [class.dropup]="sortedDateAscending"><span [class.caret]="sortedDate"></span></span></div>
-      <div class="headDescription" (click)="sortDescription()"><div [class.floatingSortHeader]="sortedDescription">Description</div><span [class.caret]="sortedDescription"></span></div>
+      <div class="headDescription" (click)="sortDescription()"><div [class.floatingSortHeader]="sortedDescription">Description</div><span [class.dropup]="sortedDescriptionAscending"><span [class.caret]="sortedDescription"></span></span></div>
     </div>
     <div class="dataListWrapper" *ngIf="user">
       <div *ngFor="let expense of sortedList; let i=index" class="dataListItem row">
@@ -23,13 +23,48 @@
             <div class="expenseDate"><div>{{expense.expenseData.date.formatted}}</div></div>
             <div class="expenseDescription"><div [class.expenseDescriptionShown]="expense.descriptionShown">{{expense.expenseData.description}}</div></div> <!-- TODO: IF text longer then 1 line, cut strings and add "..." more "button or view" -->
         </div>
-        <div class="editColumn col-md-1" ><img src="resources/icons/icon_edit.png"></div>
+        <div class="editColumn col-md-1" (click)="clickedEdit(expense)"><img src="resources/icons/icon_edit.png"></div>
       </div>
 
 
     </div>
   </div>
+
+
+  <div *ngIf="modalShown" id="myModal" class="modal" (click)="outerModalClicked()" (window:keypress)="keyDownModalGeneral($event)">
+
+    <!-- Modal content -->
+    <div class="modal-content" (click)="innerModalClicked()">
+
+      <h1 id="headerModalEdit">Edit Expense</h1>
+      <button id="editDeleteButton" (click)="deleteUserExpense(editExpenseId)">Delete Expense</button>
+      <hr class="hrAddExpense">
+
+      <div id="modalForm">
+        <div class="modalInputRow"><label for="editValue">Value</label>          <input (focus)="focusFunctionEditValue()" (blur)="onBlurEditExpenseValue()" (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editValue" id="editValue"></div>
+        <div class="modalInputRow"><label for="editDate">Date</label>            <input (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editDate.formatted" id="editDate"></div>
+
+        <div class="modalInputRow"><label id="modalCategoryLabel" for="editCategory">Category</label>
+          <select [(ngModel)]="editCategory" (ngModelChange)="modalCategoryChanged($event)">
+            <option *ngFor="let category of categories" [ngValue]="category.name" [selected]="editCategory === category.name"   >{{category.name}}</option>
+          </select>
+          <img [src]="editCategoryPath"><br class="clearFloat">
+        </div>
+
+
+        <div class="modalInputRow"><label for="editDescription">Description</label>  <input (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editDescription" id="editDescription"></div>
+      </div>
+
+      <br>
+
+      <button id="cancelModalButton" (click)="closeModal()">Cancel</button>
+      <button id="saveModalButton" (click)="saveExpenseModalClicked()">Save</button>
+    </div>
+  </div>
+
 </div>
+
+
 
 
 
