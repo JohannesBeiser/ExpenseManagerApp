@@ -6,6 +6,31 @@ h1{
   font-size: 32px;
 }
 
+#showEverythingButton{
+  margin-top: 5%;
+  font-size: 17px;
+    line-height: 2em;
+    padding: 1%;
+    text-align: center;
+    border: 1px solid #888;
+    background-color: #DDDDDD;
+    transition: 0.2s;
+    user-select: none;
+    cursor: pointer;
+}
+#showEverythingButton:hover{
+  background-color: #EEE;
+}
+
+
+#noDataFoundField{
+  line-height: 1.5em;
+  font-size: 30px;
+  border: 1px solid #444;
+  padding: 1%;
+  background: #ddd;
+}
+
 #dataListHead{
   background: #ddd;
   border: 1px solid black;
@@ -68,6 +93,7 @@ cursor: pointer;
   border: 1px solid #444;
   padding: 0;
   margin: 0;
+  margin-bottom: 5%;
 }
 
 .dataListWrapper div{
@@ -181,6 +207,82 @@ cursor: pointer;
 .editColumn>div{
   margin-top: 0.3em;
 }
+
+/* ***************************   Filter Column *************************** */
+
+.filterContainer{
+  width: 70%;
+  margin: 0 auto;
+}
+
+
+.yearFilterContainer{
+  font-size: 25px;
+  margin-top: 5%;
+  width: 100%;
+  position: relative;
+}
+
+.yearFilterContainer>input{
+  text-align: center;
+  border: 1px solid #888;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  line-height: 2em;
+}
+
+.plusYearButton{
+  user-select:none;
+  cursor:pointer;
+  color: #444;
+  position: absolute;
+  top: 0.4em;
+}
+.plusYearButton:last-child{
+  right: -25px;
+}
+.plusYearButton:first-child{
+  left: -25px;
+}
+
+.monthFilterContainer{
+  margin-top: 2%;
+  border: 1px solid #888;
+}
+
+.monthActiveStyle{
+  background: #aaa !important;
+}
+
+.monthFilterContainer>div, #allMonthsDiv{
+  font-size: 17px;
+  line-height: 2em;
+  padding: 1%;
+  text-align: center;
+  border-bottom: 1px solid #888;
+  background-color: #DDDDDD;
+  transition: 0.2s;
+  user-select:none;
+  cursor: pointer;
+
+}
+#allMonthsDiv{
+  border: 1px solid #888;
+  margin-top: 5%;
+}
+.monthFilterContainer>div:hover, #allMonthsDiv:hover{
+  background-color: #EEE;
+}
+
+.monthFilterContainer>div:last-child{
+  border: none;
+}
+
+
+
+
+
 
 
 
