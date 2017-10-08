@@ -44,7 +44,6 @@
   height: 3em;
   padding: 5px;
   outline-color: #355C7D;
-
 }
 
 #categoryWrapper{
@@ -54,6 +53,9 @@
 #categoryWrapper>div{
   display: inline;
 }
+#categoryWrapper>div:nth-child(8)>label{
+  margin-top: 2% !important;
+}
 
 #valueInput{
   font-size: 22px;
@@ -61,6 +63,7 @@
   height: 2.5em;
   width: 95%;
 }
+
 
 
 #categoryNameField{
@@ -157,7 +160,7 @@
   background-color: #AAA;
 }
 #currentTotalExpensesField>span{
-
+  font-size: 1.5em;
   float: right;
 }
 

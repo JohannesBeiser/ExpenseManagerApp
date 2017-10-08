@@ -3,9 +3,11 @@
   <ul class="list-group">
     <li class="list-group-item">Username: {{user.username}}</li>
     <li class="list-group-item">Email: {{user.email}}</li>
-    <li class="list-group-item">Amount of entries in Database: {{user.expenseData.length}}
+    <li class="list-group-item">Amount of entries in Database: {{user.expenseData.length}}</li>
+    <li class="list-group-item"> <span>Settings:</span>
       <button (click)="clearDatabaseData()" id="clearDatabase"> CLEAR DATABASE</button>
     </li>
+
   </ul>
 
 

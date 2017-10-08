@@ -39,8 +39,6 @@ export class DashboardComponent implements OnInit {
   categoriesActiveArray: any[] = [];
 
 
-
-
   @ViewChild("baseChart")
   chart: BaseChartDirective;
 
@@ -162,7 +160,7 @@ public setCurrentDateToDatepicker(){
 
   public onBlurAddExpenseValue(){
     if(this.value ==undefined || this.value == ""){
-
+        //do nothing
     }else if(!this.value.match(/[a-z]/i)){
       this.value = this.formatValue(this.value) + " €" ;
     }
@@ -314,6 +312,7 @@ public setCurrentDateToDatepicker(){
   }
 
   monthSortedExpenses: any[] =[];
+  dateSortedExpenses: any[] = [];
   tenLatestExpenses: any[] = [];
 
   public updateProfileData(){
@@ -324,6 +323,7 @@ public setCurrentDateToDatepicker(){
 
     this.authService.getProfile().subscribe(profile =>{
         this.monthSortedExpenses =[];
+        this.dateSortedExpenses = [];
         this.tenLatestExpenses = [];
         this.user= profile.user;
         for(var i=0; i<this.user.expenseData.length; i++){
@@ -347,13 +347,40 @@ public setCurrentDateToDatepicker(){
 
             }
           }
+
+          if(this.user.expenseData != undefined && this.user.expenseData.length != 0){
+              if(this.dateSortedExpenses==undefined || this.dateSortedExpenses.length==0){
+                this.dateSortedExpenses.push(this.user.expenseData[0]); //only execute when empty
+              }else{
+                var sortedBorder=this.dateSortedExpenses.length;
+                for(var j=0; j<sortedBorder;j++){// ...iterate through all of the already sorted entries...
+
+                  var newDate = new Date( parseInt(this.user.expenseData[i].date.year) , (parseInt(this.user.expenseData[i].date.month)-1) ,parseInt(this.user.expenseData[i].date.day)   ); //Year - monthIndex - day
+                  var comparingToDate = new Date( parseInt(this.dateSortedExpenses[j].date.year) , (parseInt(this.dateSortedExpenses[j].date.month)-1) ,parseInt(this.dateSortedExpenses[j].date.day)   ); //Year - monthIndex - day
+
+                  if(newDate >=comparingToDate){
+                    this.dateSortedExpenses.splice(j,0,this.user.expenseData[i]);
+                    break;
+                  }
+
+                  if(j == sortedBorder-1){ //...and one after the other add a new entry sorted into the sorted List
+                    this.dateSortedExpenses.push(this.user.expenseData[i]);
+                    break;
+                  }
+                }
+              }
+
+
+            }
+
+
         } // Category total counting and sorting
         if(this.latestActive){
-          var counter = this.monthSortedExpenses.length;
+          var counter = this.dateSortedExpenses.length;
           var numberOfCounts =0;
           while(numberOfCounts<10 && counter>0){ // loads up to 10 latest expenses
               this.tenLatestExpenses.push({
-                expenseData: this.monthSortedExpenses[numberOfCounts],
+                expenseData: this.dateSortedExpenses[numberOfCounts],
                 shown: false
               });
             this.tenLatestExpenses[numberOfCounts].expenseData.value = this.formatNumberToCurrency(this.tenLatestExpenses[numberOfCounts].expenseData.value);

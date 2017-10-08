@@ -14,7 +14,6 @@ import {ValidateService} from '../../services/validate.service';
   styleUrls: ['./expense-list.component.css']
 })
 export class ExpenseListComponent implements OnInit {
-
   constructor(private authService : AuthService,
               private validateService: ValidateService,
               private _compCommunicationService : ComponentCommunicationService,
@@ -23,9 +22,84 @@ export class ExpenseListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+      this._compCommunicationService.expenseListActive=true;
+      this.currentDate= new Date();
+      this.filterYear = this.currentDate.getFullYear();
+
+      this.monthActiveArray=[];
+      for(var i=0; i<13; i++){//Not 12 but 13, because of the "all Months" option
+        this.monthActiveArray.push(false);
+      }
+      this.monthActiveArray[0]=true;
+
       this.loadUnfilteredList();
-      this.sortEntries();
   }
+
+  //unfilteredExpenselist-->filteredList-->sortedList (...for production)
+  unfilteredExpenselist: any[] = [];
+  filteredList: any[] = [];
+  sortedList : any[] =[];
+  user: any;
+
+  currentDate: any;
+  filterYear: any;
+  monthActiveArray: boolean[] = []
+  monthNames: string[] =["January","February","March","April","May","June", "July", "August", "September", "Oktober", "November", "December"]
+  everythingShown: boolean = false;
+
+public showEverything(){
+//  this.filterYear = undefined;
+  for(var i=0; i<13;i++){
+    this.monthActiveArray[i]=false;
+  }
+  this.everythingShown = true;
+  this.filterList();
+}
+
+
+public filterList(){
+  console.log("now filtering enterd");
+  let activeMonthFilter: number = this.monthActiveArray.indexOf(true); //from 0 for all to 12 for december
+  this.filteredList = [];
+  if(this.unfilteredExpenselist!=undefined){ //only if one specific month selected - not "all months" btn
+    for(var i=0;i<this.unfilteredExpenselist.length;i++){
+      if(parseInt(this.unfilteredExpenselist[i].expenseData.date.year)== this.filterYear || this.everythingShown){
+        if(parseInt(this.unfilteredExpenselist[i].expenseData.date.month) == activeMonthFilter || activeMonthFilter==0 || this.everythingShown ){
+          this.filteredList.push(this.unfilteredExpenselist[i]);
+          console.log("pushed "+i);
+        }
+      }
+
+    }
+  }
+  this.sortEntries();
+}
+
+
+  public activateMonthFilter(index: number){
+    for(var i=0; i<13;i++){
+      this.monthActiveArray[i]=false;
+    }
+    this.monthActiveArray[index]=true;
+    this.everythingShown = false;
+    this.filterList();
+  }
+
+  public plusYear(amount){// +1 vor increment and -1 for decrement
+    this.everythingShown = false;
+      if(this.filterYear.toString().match(/[a-z]/i)){
+        this.flashMessage.show("Year must only contain numbers", {cssClass: 'alert-danger', timeout:2500});
+      }
+      else{
+        this.filterYear= parseInt(this.filterYear);
+        this.filterYear+= amount;
+      }
+      this.filterList();
+  }
+
+
+
+
 
   categories = this._compCommunicationService.categories;
 
@@ -46,24 +120,27 @@ export class ExpenseListComponent implements OnInit {
  * 3.) Date
  */
 public sortEntries(){
-  if(this.sortedCategory){ //also sort with descending date and categories order deoend on order of entries in list (-->maybe order or categories array description?)
-      if(this.unfilteredExpenselist !=undefined){
-        this.sortedList = [];
-        this.sortedList.push(this.unfilteredExpenselist[0]);
+  this.sortedList = [];
 
-        for(var i=1; i<this.unfilteredExpenselist.length;i++){ //for all entries that exist...
+
+  if(this.sortedCategory){ //also sort with descending date and categories order deoend on order of entries in list (-->maybe order or categories array description?)
+      if(this.filteredList !=undefined && this.filteredList.length != 0){
+        this.sortedList = [];
+        this.sortedList.push(this.filteredList[0]);
+
+        for(var i=1; i<this.filteredList.length;i++){ //for all entries that exist...
             var sortedBorder=this.sortedList.length;
 
             for(var j=0; j<sortedBorder;j++){// ...iterate through all of the already sorted entries...
-              var newCategory = this.unfilteredExpenselist[i].expenseData.category;
+              var newCategory = this.filteredList[i].expenseData.category;
               var conparingToCategory = this.sortedList[j].expenseData.category;
 
               if(newCategory == conparingToCategory){
-                this.sortedList.splice(j,0,this.unfilteredExpenselist[i]);
+                this.sortedList.splice(j,0,this.filteredList[i]);
                 break;
               }
               if(j == sortedBorder-1){ //...and one after the other add a new entry sorted into the sorted List
-                this.sortedList.push(this.unfilteredExpenselist[i]);
+                this.sortedList.push(this.filteredList[i]);
                 break;
               }
             }
@@ -75,23 +152,23 @@ public sortEntries(){
     }
   }else if(this.sortedAmount){
 
-    if(this.unfilteredExpenselist !=undefined){
+    if(this.filteredList !=undefined && this.filteredList.length != 0){
       this.sortedList = [];
-      this.sortedList.push(this.unfilteredExpenselist[0]);
+      this.sortedList.push(this.filteredList[0]);
 
-      for(var i=1; i<this.unfilteredExpenselist.length;i++){ //for all entries that exist...
+      for(var i=1; i<this.filteredList.length;i++){ //for all entries that exist...
           var sortedBorder=this.sortedList.length;
 
           for(var j=0; j<sortedBorder;j++){// ...iterate through all of the already sorted entries...
-            var newAmount = parseInt(this.unfilteredExpenselist[i].expenseData.value);
+            var newAmount = parseInt(this.filteredList[i].expenseData.value);
             var conparingToAmount = parseInt(this.sortedList[j].expenseData.value);
 
             if(newAmount >= conparingToAmount){
-              this.sortedList.splice(j,0,this.unfilteredExpenselist[i]);
+              this.sortedList.splice(j,0,this.filteredList[i]);
               break;
             }
             if(j == sortedBorder-1){ //...and one after the other add a new entry sorted into the sorted List
-              this.sortedList.push(this.unfilteredExpenselist[i]);
+              this.sortedList.push(this.filteredList[i]);
               break;
             }
           }
@@ -102,23 +179,30 @@ public sortEntries(){
       this.sortedList.reverse();
     }
   }else if(this.sortedDate){
-    if(this.unfilteredExpenselist != undefined){
-        this.sortedList = [];
-        this.sortedList.push(this.unfilteredExpenselist[0]);
 
-        for(var i=1; i<this.unfilteredExpenselist.length;i++){ //for all entries that exist...
+    if(this.filteredList != undefined && this.filteredList.length != 0){
+      console.log("sorting date");
+
+        this.sortedList.push(this.filteredList[0]);
+        console.log("initial push");
+
+        for(var i=1; i<this.filteredList.length;i++){ //for all entries that exist...
             var sortedBorder=this.sortedList.length;
 
             for(var j=0; j<sortedBorder;j++){// ...iterate through all of the already sorted entries...
-              var newDate = new Date( parseInt(this.unfilteredExpenselist[i].expenseData.date.year) , (parseInt(this.unfilteredExpenselist[i].expenseData.date.month)-1) ,parseInt(this.unfilteredExpenselist[i].expenseData.date.day)   ); //Year - monthIndex - day
+              var newDate = new Date( parseInt(this.filteredList[i].expenseData.date.year) , (parseInt(this.filteredList[i].expenseData.date.month)-1) ,parseInt(this.filteredList[i].expenseData.date.day)   ); //Year - monthIndex - day
               var comparingToDate = new Date( parseInt(this.sortedList[j].expenseData.date.year) , (parseInt(this.sortedList[j].expenseData.date.month)-1) ,parseInt(this.sortedList[j].expenseData.date.day)   ); //Year - monthIndex - day
 
               if(newDate >=comparingToDate){
-                this.sortedList.splice(j,0,this.unfilteredExpenselist[i]);
+                console.log("inserted to index" + j);
+
+                this.sortedList.splice(j,0,this.filteredList[i]);
                 break;
               }
               if(j == sortedBorder-1){ //...and one after the other add a new entry sorted into the sorted List
-                this.sortedList.push(this.unfilteredExpenselist[i]);
+                console.log("pushed to end of List");
+
+                this.sortedList.push(this.filteredList[i]);
                 break;
               }
             }
@@ -129,22 +213,22 @@ public sortEntries(){
       this.sortedList.reverse();
     }
   }else if(this.sortedDescription){
-    if(this.unfilteredExpenselist != undefined){
+    if(this.filteredList != undefined && this.filteredList.length != 0){
         this.sortedList = [];
-        this.sortedList.push(this.unfilteredExpenselist[0]);
+        this.sortedList.push(this.filteredList[0]);
 
-        for(var i=1; i<this.unfilteredExpenselist.length;i++){ //for all entries that exist...
+        for(var i=1; i<this.filteredList.length;i++){ //for all entries that exist...
             var sortedBorder=this.sortedList.length;
 
             for(var j=0; j<sortedBorder;j++){// ...iterate through all of the already sorted entries...
-              var newDescription = this.unfilteredExpenselist[i].expenseData.description.charAt(0);
+              var newDescription = this.filteredList[i].expenseData.description.charAt(0);
               var comparingToDescription = this.sortedList[j].expenseData.description.charAt(0);
               if(newDescription<=comparingToDescription){
-                this.sortedList.splice(j,0,this.unfilteredExpenselist[i]);
+                this.sortedList.splice(j,0,this.filteredList[i]);
                 break;
               }
               if(j == sortedBorder-1){ //...and one after the other add a new entry sorted into the sorted List
-                this.sortedList.push(this.unfilteredExpenselist[i]);
+                this.sortedList.push(this.filteredList[i]);
                 break;
               }
             }
@@ -221,9 +305,7 @@ public sortEntries(){
     return path;
   }
 
-unfilteredExpenselist: any[] = [];
-sortedList : any[] =[];
-user: any;
+
 
 public loadUnfilteredList(){
 
@@ -236,7 +318,7 @@ public loadUnfilteredList(){
         descriptionShown: false
       });
     }
-    this.sortEntries();
+    this.filterList();
     },
     err => {
       console.log(err);
