@@ -92,7 +92,9 @@
       </ul>
 
       <div style="display: block">
-        <canvas id="categoryChart"
+        <div id="noEntriesForChart" *ngIf="monthSortedExpenses==undefined || monthSortedExpenses.length==0">No expenses for current month</div>
+        <canvas *ngIf="!monthSortedExpenses==undefined || !monthSortedExpenses.length==0"
+                id="categoryChart"
                 baseChart #baseChart="base-chart"
                 [data]="pieChartData"
                 [labels]="pieChartLabels"
@@ -193,5 +195,5 @@
       <button id="saveModalButton" (click)="saveExpenseModalClicked()">Save</button>
     </div>
   </div>
-  
+
 </div>

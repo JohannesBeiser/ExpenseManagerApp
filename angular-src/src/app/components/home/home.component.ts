@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
     this._compCommunication.activateHomeSite();
  }
 
+
   ngOnInit() {
     this._compCommunication.activateHomeSite();
     this.slideIndex = -1;

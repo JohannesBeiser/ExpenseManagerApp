@@ -8,10 +8,6 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import {ValidateService} from '../../services/validate.service';
 
 
-
-
-
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
