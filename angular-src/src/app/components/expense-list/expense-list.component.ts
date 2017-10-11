@@ -30,7 +30,8 @@ export class ExpenseListComponent implements OnInit {
       for(var i=0; i<13; i++){//Not 12 but 13, because of the "all Months" option
         this.monthActiveArray.push(false);
       }
-      this.monthActiveArray[0]=true;
+
+      this.monthActiveArray[this.currentDate.getMonth()+1]=true;
 
       this.loadUnfilteredList();
   }
