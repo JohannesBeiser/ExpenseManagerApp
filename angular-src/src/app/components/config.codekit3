@@ -9,6 +9,16 @@
 	],
 "creatorBuild": "25900",
 "files": {
+	"\/dashboard\/dashboard.component.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/dashboard\/dashboard.component-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"\/dashboard\/dashboard.component.html": {
 		"ft": 8192,
 		"oA": 1,
@@ -44,6 +54,33 @@
 		"rC": 0,
 		"sIE": 0,
 		"tEC": 0
+		},
+	"\/dashboard\/dashboard.component.ts": {
+		"cDF": 0,
+		"ft": 128,
+		"jxM": 0,
+		"ma": 0,
+		"mi": 0,
+		"moR": 0,
+		"moT": 2,
+		"nIA": 0,
+		"oA": 1,
+		"oAP": "\/dashboard\/dashboard.component.js",
+		"oF": 0,
+		"pCE": 0,
+		"rC": 0,
+		"sIE": 0,
+		"tEC": 0
+		},
+	"\/expense-list\/expense-list.component.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/expense-list\/expense-list.component-min.css",
+		"oF": 0,
+		"oS": 3
 		},
 	"\/expense-list\/expense-list.component.html": {
 		"ft": 8192,
@@ -273,6 +310,22 @@
 		"rC": 0,
 		"sIE": 0,
 		"tEC": 0
+		},
+	"\/profile\/profile.component.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/profile\/profile.component-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"\/profile\/profile.component.html": {
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/profile\/profile.component.html",
+		"oF": 1
 		},
 	"\/profile\/profile.component.sass": {
 		"aP": 0,
