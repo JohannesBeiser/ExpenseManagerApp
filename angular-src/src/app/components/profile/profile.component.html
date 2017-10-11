@@ -1,11 +1,15 @@
 <div *ngIf="user">
   <h2 class="page-header">{{user.name}}</h2>
   <ul class="list-group">
-    <li class="list-group-item">Username: {{user.username}}</li>
-    <li class="list-group-item">Email: {{user.email}}</li>
-    <li class="list-group-item">Amount of entries in Database: {{user.expenseData.length}}
+    <li class="list-group-item"><span>Username: </span>{{user.username}}</li>
+    <li class="list-group-item"><span>Email: </span>{{user.email}}</li>
+    <li class="list-group-item">Amount of entries in Database: {{user.expenseData.length}}</li>
+    <li class="list-group-item profileSettingsItem">
+      <span>Settings:</span>
+      <br>
       <button (click)="clearDatabaseData()" id="clearDatabase"> CLEAR DATABASE</button>
     </li>
+
   </ul>
 
 

@@ -1,0 +1,315 @@
+hr {
+  border-color: #444;
+  margin: 0; }
+
+h1 {
+  font-size: 32px; }
+
+#showEverythingButton {
+  margin-top: 5%;
+  font-size: 17px;
+  line-height: 2em;
+  padding: 1%;
+  text-align: center;
+  border: 1px solid #888;
+  background-color: #DDDDDD;
+  transition: 0.2s;
+  user-select: none;
+  cursor: pointer; }
+  #showEverythingButton:hover {
+    background-color: #EEE; }
+
+#noDataFoundField {
+  line-height: 1.5em;
+  font-size: 30px;
+  border: 1px solid #444;
+  padding: 1%;
+  background: #ddd; }
+
+#dataListHead {
+  background: #ddd;
+  border: 1px solid black;
+  margin-bottom: 1%;
+  font-size: 1.5em; }
+  #dataListHead > div {
+    display: inline-block;
+    padding: 1% 0;
+    /*  border-right: 1px solid black; */ }
+    #dataListHead > div:last-child {
+      border: none; }
+  #dataListHead .headNr {
+    width: 7.2%;
+    padding-left: 2%;
+    background-color: #888888; }
+  #dataListHead .headCategory > div, #dataListHead .headAmount > div, #dataListHead .headDate > div {
+    margin-right: 5%; }
+  #dataListHead .headCategory {
+    width: 13%;
+    cursor: pointer; }
+    #dataListHead .headCategory:hover {
+      color: #444; }
+  #dataListHead .headAmount {
+    width: 12.5%;
+    cursor: pointer; }
+    #dataListHead .headAmount:hover {
+      color: #444; }
+  #dataListHead .headDate {
+    width: 16%;
+    cursor: pointer;
+    margin-left: 1.5%; }
+    #dataListHead .headDate:hover {
+      color: #444; }
+  #dataListHead .headDescription {
+    cursor: pointer; }
+    #dataListHead .headDescription:hover {
+      color: #444; }
+
+.dataListWrapper {
+  border: 1px solid #444;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5%; }
+  .dataListWrapper div {
+    padding: 0;
+    margin: 0; }
+  .dataListWrapper > div:last-child {
+    border: none; }
+
+.dataListItem {
+  border-bottom: 1px solid #444;
+  font-size: 18px;
+  background-color: #DDDDDD;
+  transition: background-color 0.2s; }
+
+.infoColumn {
+  height: 100%; }
+
+.dataListItem:hover {
+  background-color: #eee; }
+
+.expenseNumber {
+  width: 8%;
+  background: #888;
+  position: absolute;
+  text-align: center;
+  height: 100%;
+  font-size: 1.5em; }
+  .expenseNumber > div {
+    margin-top: .4em; }
+
+.categoryIcon {
+  float: left;
+  width: 10%;
+  height: 100%;
+  margin-left: 10% !important; }
+  .categoryIcon > img {
+    width: 60%;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-bottom: 10%; }
+
+.expenseValue {
+  float: left;
+  width: 20%;
+  height: 100%;
+  font-size: 1.5em;
+  position: relative;
+  left: 4%; }
+  .expenseValue > div {
+    margin-top: 0.4em; }
+
+.expenseDate {
+  float: left;
+  width: 15%;
+  height: 100%;
+  height: 2em !important; }
+  .expenseDate > div {
+    margin-top: 14%; }
+
+.expenseDescription {
+  float: left;
+  width: 40%;
+  position: relative;
+  left: 4%;
+  overflow: hidden; }
+  .expenseDescription > div {
+    margin-top: 4.444%;
+    height: 1.5em;
+    transition: height 0.2s ease; }
+
+.expenseDescriptionShown {
+  height: initial !important; }
+
+.editColumn {
+  height: 100%; }
+  .editColumn img {
+    width: 60%;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 5%; }
+    .editColumn img:hover {
+      width: 65%; }
+
+.floatingSortHeader {
+  float: left; }
+
+.editColumn > div {
+  margin-top: 0.3em; }
+
+/* ***************************   Filter Column *************************** */
+.filterContainer {
+  width: 70%;
+  margin: 0 auto; }
+
+.yearFilterContainer {
+  font-size: 25px;
+  margin-top: 5%;
+  width: 100%;
+  position: relative; }
+  .yearFilterContainer > input {
+    text-align: center;
+    border: 1px solid #888;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    line-height: 2em; }
+
+.plusYearButton {
+  user-select: none;
+  cursor: pointer;
+  color: #444;
+  position: absolute;
+  top: 0.4em; }
+  .plusYearButton:last-child {
+    right: -25px; }
+  .plusYearButton:first-child {
+    left: -25px; }
+
+.monthFilterContainer {
+  margin-top: 2%;
+  border: 1px solid #888; }
+
+.monthActiveStyle {
+  background: #aaa !important; }
+
+.monthFilterContainer > div {
+  font-size: 17px;
+  line-height: 2em;
+  padding: 1%;
+  text-align: center;
+  border-bottom: 1px solid #888;
+  background-color: #DDDDDD;
+  transition: 0.2s;
+  user-select: none;
+  cursor: pointer; }
+
+#allMonthsDiv {
+  font-size: 17px;
+  line-height: 2em;
+  padding: 1%;
+  text-align: center;
+  border-bottom: 1px solid #888;
+  background-color: #DDDDDD;
+  transition: 0.2s;
+  user-select: none;
+  cursor: pointer;
+  border: 1px solid #888;
+  margin-top: 5%; }
+
+.monthFilterContainer > div:hover, #allMonthsDiv:hover {
+  background-color: #EEE; }
+
+.monthFilterContainer > div:last-child {
+  border: none; }
+
+/* ***************************   MODAL *************************** */
+/* The Modal (background) */
+.modal {
+  display: block;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Black w/ opacity */ }
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #DDDDDD;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  /* Could be more or less, depending on screen size */
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s; }
+
+#editDeleteButton {
+  position: absolute;
+  top: 5%;
+  right: 7%;
+  line-height: 2em;
+  background-color: #CE4441; }
+  #editDeleteButton:hover {
+    background-color: #C9302C; }
+
+#saveModalButton {
+  background-color: #A0C47D;
+  float: right;
+  line-height: 3em;
+  min-width: 20%; }
+  #saveModalButton:hover {
+    background-color: #78AB46; }
+
+#cancelModalButton {
+  line-height: 3em;
+  min-width: 20%; }
+
+#modalForm {
+  margin-top: 5%; }
+  #modalForm input {
+    line-height: 2em;
+    background-color: #eee;
+    border: 1px solid #888;
+    width: 25%;
+    padding: 0 5px; }
+  #modalForm select {
+    height: 2.25em;
+    width: 26%;
+    background-color: #eee;
+    padding: 0 5px; }
+  #modalForm label {
+    width: 20%; }
+  #modalForm img {
+    margin-right: 0.5%;
+    width: 2.48em; }
+
+#modalCategoryLabel {
+  float: left; }
+
+.modalInputRow {
+  line-height: 3em; }
+
+#headerModalEdit {
+  font-size: 2em;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 2.5%; }
+
+#editCategory {
+  float: left;
+  margin-right: 1%; }

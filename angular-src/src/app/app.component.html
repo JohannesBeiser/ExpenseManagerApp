@@ -2,16 +2,16 @@
 
 <app-navbar></app-navbar>
 
-<div class="containerBox ">
-  <div class="container row"  [class.siteContainerForBackgroundImage]="_compCommunication.onHomeSite">
+<div class="containerBox">
+  <div class="container row"  [class.siteContainerForBackgroundImage]="_compCommunication.onHomeSite" style="position:relative">
   <div  [class.gradientTest]="_compCommunication.onHomeSite"></div>
     <!--- - - - - - - - - - - - - - - - - - Sidebar---------------------------------------------------------->
-    <div class="col-md-1 no-float height " id="appSidebar" >
+    <div class="col-md-1 no-float height " id="appSidebar" style="position:absolute; min-height:100vh">
       <app-sidebar *ngIf="authService.loggedIn()"></app-sidebar>
     </div>
 
     <!-- - - - - - - - - - - - - - - - - - - Content---------------------------------------------------------->
-    <div class="col-md-11 routedStyle">
+    <div class="col-md-11 routedStyle" style="margin-left:8%">
 
 
 

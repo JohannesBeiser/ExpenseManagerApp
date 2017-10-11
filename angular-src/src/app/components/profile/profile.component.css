@@ -1,10 +1,11 @@
-#clearDatabase{
-  background-color: #CE4441;
+#clearDatabase {
+  background-color: #C26259;
   transition: background-color 0.2s ease;
   line-height: 2em;
-}
+  padding: 2%;
+  color: #444; }
+  #clearDatabase:hover {
+    background-color: #ae5850; }
 
-
-#clearDatabase:hover{
-  background-color: #C9302C;
-}
+.profileSettingsItem > span {
+  display: block; }

@@ -1,0 +1,91 @@
+
+<div class="row">
+  <div class=" expenseFilterArea col-md-4"> <!--Filter Area -->
+    <h1>Filter</h1>
+    <hr>
+
+<div class="filterContainer">
+
+<!--  <div [class.monthActiveStyle]="everythingShown" (click)="showEverything()" id="showEverythingButton">Show everything</div>   //   REMOVED FEATURE BUT STILL IMPLEMENTED
+<br>
+<h2 style="text-align:center">Date Filter</h2>
+<hr> -->
+  <div class="yearFilterContainer">
+    <span class="plusYearButton" (click)="plusYear(-1)">&#10094;</span>
+    <input type="text" name="filterYear" [(ngModel)]="filterYear">
+    <span class="plusYearButton" (click)="plusYear(1)">&#10095;</span>
+  </div>
+
+  <div [class.monthActiveStyle]="monthActiveArray[0]" (click)="activateMonthFilter(0)" id="allMonthsDiv">All Months</div>
+
+  <div class="monthFilterContainer">
+    <div *ngFor="let month of monthNames; let i=index" [class.monthActiveStyle]="monthActiveArray[i+1]" (click)="activateMonthFilter(i+1)">{{month}}</div>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+
+  <div class="expenseDataArea col-md-8"> <!--Entry Area -->
+    <h1>Expense List</h1>
+    <div id="dataListHead">
+      <div class="headNr"><div>Nr.</div></div>
+      <div class="headCategory" (click)="sortCategory()"><div [class.floatingSortHeader]="sortedCategory">Category</div><span [class.dropup]="sortedCategoryAscending"><span [class.caret]="sortedCategory"></span></span></div>
+      <div class="headAmount" (click)="sortAmount()"><div [class.floatingSortHeader]="sortedAmount">Amount</div><span [class.dropup]="sortedAmountAscending"><span [class.caret]="sortedAmount"></span></span></div>
+      <div class="headDate" (click)="sortDate()"><div [class.floatingSortHeader]="sortedDate">Date</div><span [class.dropup]="sortedDateAscending"><span [class.caret]="sortedDate"></span></span></div>
+      <div class="headDescription" (click)="sortDescription()"><div [class.floatingSortHeader]="sortedDescription">Description</div><span [class.dropup]="sortedDescriptionAscending"><span [class.caret]="sortedDescription"></span></span></div>
+    </div>
+
+    <div id="noDataFoundField" *ngIf="sortedList.length==0 && user">No entries found</div>
+    <div class="dataListWrapper" *ngIf="user && sortedList.length>0">
+      <div *ngFor="let expense of sortedList; let i=index" class="dataListItem row">
+        <div class="infoColumn col-md-11" (click)="showFullDescription(expense)">
+            <div class="expenseNumber"><div>{{i+1}}</div></div> <!-- BUG: CSS-Bug floating div has fixed height that fits the macbook screen but has tu actually be at a 100% -->
+            <div class="categoryIcon"><img [src]="getCategoryIconPath(expense.expenseData.category)" alt="category icon"></div>
+            <div class="expenseValue"><div>{{expense.expenseData.value}}</div></div>
+            <div class="expenseDate"><div>{{expense.expenseData.date.formatted}}</div></div>
+            <div class="expenseDescription"><div [class.expenseDescriptionShown]="expense.descriptionShown">{{expense.expenseData.description}}</div></div> <!-- TODO: IF text longer then 1 line, cut strings and add "..." more "button or view" -->
+        </div>
+        <div class="editColumn col-md-1" (click)="clickedEdit(expense)"><img src="resources/icons/icon_edit.png"></div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <div *ngIf="modalShown" id="myModal" class="modal" (click)="outerModalClicked()" (window:keypress)="keyDownModalGeneral($event)">
+
+    <!-- Modal content -->
+    <div class="modal-content" (click)="innerModalClicked()">
+
+      <h1 id="headerModalEdit">Edit Expense</h1>
+      <button id="editDeleteButton" (click)="deleteUserExpense(editExpenseId)">Delete Expense</button>
+      <hr class="hrAddExpense">
+
+      <div id="modalForm">
+        <div class="modalInputRow"><label for="editValue">Value</label>          <input (focus)="focusFunctionEditValue()" (blur)="onBlurEditExpenseValue()" (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editValue" id="editValue"></div>
+        <div class="modalInputRow"><label for="editDate">Date</label>            <input (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editDate.formatted" id="editDate"></div>
+
+        <div class="modalInputRow"><label id="modalCategoryLabel" for="editCategory">Category</label>
+          <select [(ngModel)]="editCategory" (ngModelChange)="modalCategoryChanged($event)">
+            <option *ngFor="let category of categories" [ngValue]="category.name" [selected]="editCategory === category.name"   >{{category.name}}</option>
+          </select>
+          <img [src]="editCategoryPath"><br class="clearFloat">
+        </div>
+
+
+        <div class="modalInputRow"><label for="editDescription">Description</label>  <input (keydown)="keyDownModalEdit($event)" type="text" [(ngModel)]="editDescription" id="editDescription"></div>
+      </div>
+
+      <br>
+
+      <button id="cancelModalButton" (click)="closeModal()">Cancel</button>
+      <button id="saveModalButton" (click)="saveExpenseModalClicked()">Save</button>
+    </div>
+  </div>
+
+</div>

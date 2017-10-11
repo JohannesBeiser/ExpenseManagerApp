@@ -19,6 +19,7 @@ import {FlashMessagesModule} from 'angular2-flash-messages';
 import { AuthGuard} from './guards/auth.guard';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ExpenseListComponent } from './components/expense-list/expense-list.component';
 
 
 import { ChartsModule } from 'ng2-charts';
@@ -37,6 +38,7 @@ const appRoutes: Routes =[
     {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
     {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
     {path:'statistics', component: StatisticsComponent, canActivate:[AuthGuard]},
+    {path:'expenseList', component: ExpenseListComponent, canActivate:[AuthGuard]},
 ];
 
 @NgModule({
@@ -49,7 +51,9 @@ const appRoutes: Routes =[
     DashboardComponent,
     ProfileComponent,
     SidebarComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    NavbarComponent,
+    ExpenseListComponent
   ],
   imports: [
     BrowserModule,

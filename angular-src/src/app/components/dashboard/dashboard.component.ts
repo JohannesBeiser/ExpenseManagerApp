@@ -8,10 +8,6 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import {ValidateService} from '../../services/validate.service';
 
 
-
-
-
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -35,57 +31,9 @@ export class DashboardComponent implements OnInit {
 
   user: any;
 
-  categories = [   // TODO: Farbenerst bei hover original - davor entsättigt
-    { name: 'Food',
-      color: '#607D8A',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Food.png'
-    },
-    {
-      name: 'Transport',
-      color: '#A5A8AA',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Transport.png'
-    },
-    {
-      name: 'Accommodation',
-      color: '#FFCD34',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Accomodation.png'
-    },
-    {
-      name: 'Leisure',
-      color: '#92CD00',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Leisure2.png'
-    },
-    {
-      name: 'Multimedia',
-      color:  '#b14947',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Multimedia.png'
-    },
-    {
-      name: 'Insurance & Health',
-      color: '#fb8c00',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Insurance.png'
+  categories = this._compCommunicationService.categories; // TODO: Farbenerst bei hover original - davor entsättigt
+  categoriesActiveArray: any[] = [];
 
-    },
-    {
-      name: 'Clothing & Hygiene',
-      color: '#645F5D',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_Clothing.png'
-    },
-    {
-      name: 'General',
-      color: '#444444',
-      amount: 0,
-      iconPath: 'resources/icons/categories/icon_General2.png'
-
-    }
-  ];
 
   @ViewChild("baseChart")
   chart: BaseChartDirective;
@@ -112,6 +60,12 @@ export class DashboardComponent implements OnInit {
     this.currentYear = this.newDate.getFullYear();
     this.updateProfileData();
     this.setCurrentDateToDatepicker();
+
+
+    for(var i=0; i<this.categories.length;i++){
+      this.categoriesActiveArray.push(false);
+    }
+    this.categoriesActiveArray[this.categories.length-1]=true;
 }
 
 
@@ -187,8 +141,12 @@ public setCurrentDateToDatepicker(){
     console.log(e);
   }
 
-  public setCategoryName(value: string){
+  public setCategoryName(value: string, index: number){
     this.categoryName = value;
+    for(var i=0; i<this.categoriesActiveArray.length;i++){
+      this.categoriesActiveArray[i]=false;
+    }
+    this.categoriesActiveArray[index]=true;
   }
 
   value: any;
@@ -198,7 +156,7 @@ public setCurrentDateToDatepicker(){
 
   public onBlurAddExpenseValue(){
     if(this.value ==undefined || this.value == ""){
-
+        //do nothing
     }else if(!this.value.match(/[a-z]/i)){
       this.value = this.formatValue(this.value) + " €" ;
     }
@@ -250,7 +208,7 @@ public setCurrentDateToDatepicker(){
         const expense ={
             expenseId: profile.user.nextExpenseDataId,
             value: this.value,
-            category: this.category,
+            category: this.categoryName,
             date: this.datepickerDate,
             description: this.description
         };
@@ -350,6 +308,7 @@ public setCurrentDateToDatepicker(){
   }
 
   monthSortedExpenses: any[] =[];
+  dateSortedExpenses: any[] = [];
   tenLatestExpenses: any[] = [];
 
   public updateProfileData(){
@@ -360,6 +319,7 @@ public setCurrentDateToDatepicker(){
 
     this.authService.getProfile().subscribe(profile =>{
         this.monthSortedExpenses =[];
+        this.dateSortedExpenses = [];
         this.tenLatestExpenses = [];
         this.user= profile.user;
         for(var i=0; i<this.user.expenseData.length; i++){
@@ -383,13 +343,40 @@ public setCurrentDateToDatepicker(){
 
             }
           }
+
+          if(this.user.expenseData != undefined && this.user.expenseData.length != 0){
+              if(this.dateSortedExpenses==undefined || this.dateSortedExpenses.length==0){
+                this.dateSortedExpenses.push(this.user.expenseData[0]); //only execute when empty
+              }else{
+                var sortedBorder=this.dateSortedExpenses.length;
+                for(var j=0; j<sortedBorder;j++){// ...iterate through all of the already sorted entries...
+
+                  var newDate = new Date( parseInt(this.user.expenseData[i].date.year) , (parseInt(this.user.expenseData[i].date.month)-1) ,parseInt(this.user.expenseData[i].date.day)   ); //Year - monthIndex - day
+                  var comparingToDate = new Date( parseInt(this.dateSortedExpenses[j].date.year) , (parseInt(this.dateSortedExpenses[j].date.month)-1) ,parseInt(this.dateSortedExpenses[j].date.day)   ); //Year - monthIndex - day
+
+                  if(newDate >=comparingToDate){
+                    this.dateSortedExpenses.splice(j,0,this.user.expenseData[i]);
+                    break;
+                  }
+
+                  if(j == sortedBorder-1){ //...and one after the other add a new entry sorted into the sorted List
+                    this.dateSortedExpenses.push(this.user.expenseData[i]);
+                    break;
+                  }
+                }
+              }
+
+
+            }
+
+
         } // Category total counting and sorting
         if(this.latestActive){
-          var counter = this.monthSortedExpenses.length;
+          var counter = this.dateSortedExpenses.length;
           var numberOfCounts =0;
           while(numberOfCounts<10 && counter>0){ // loads up to 10 latest expenses
               this.tenLatestExpenses.push({
-                expenseData: this.monthSortedExpenses[numberOfCounts],
+                expenseData: this.dateSortedExpenses[numberOfCounts],
                 shown: false
               });
             this.tenLatestExpenses[numberOfCounts].expenseData.value = this.formatNumberToCurrency(this.tenLatestExpenses[numberOfCounts].expenseData.value);
@@ -464,7 +451,7 @@ public setCurrentDateToDatepicker(){
   editDescription: string ="";
   editExpenseId: number;
 
-  modalShown: boolean =false;
+  modalShown: boolean =false; //TODO: When editing descriptiona dne emptying it, setting to " - no description available -"
   public clickedEdit(expense){
     this.editValue= expense.expenseData.value + " €";
     this.editDate= expense.expenseData.date;
@@ -503,7 +490,13 @@ public setCurrentDateToDatepicker(){
         date: this.editDate,
         description: this.editDescription
     };
+
+
 /* ***********************  PRE FORMATTING    ******************************* */
+
+if(expense.description=="" || expense.description==undefined){
+    expense.description="- no description available -";
+}
     var splitterChar: string = "-";
     var seperatorIndex = expense.date.formatted.length -5;
     splitterChar = expense.date.formatted.charAt(seperatorIndex);

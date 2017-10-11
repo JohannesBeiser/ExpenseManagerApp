@@ -13,8 +13,11 @@ import {ComponentCommunicationService} from './services/component-communication.
   styleUrls: ['./app.component.css']
 })
 
+
+
 export class AppComponent implements OnInit{
   title = 'app works!';
+  onExpenseListSite: boolean= true;
 
   constructor(private authService: AuthService,
               private _compCommunication: ComponentCommunicationService

@@ -15,6 +15,7 @@
       <ul class="nav navbar-nav navbar-left">
         <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a (click) ="_compCommunicationService.deactivateAll()" (click) ="_compCommunicationService.activateHomeSite()" [routerLink]="['/']">Home</a></li>
         <li *ngIf="authService.loggedIn()" class="mobileSideButton" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']" (click) ="_compCommunicationService.deactivateHomeSite()">Dashboard</a></li>
+        <li *ngIf="authService.loggedIn()" class="mobileSideButton" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/expenseList']" (click) ="_compCommunicationService.deactivateHomeSite()">Expense List</a></li>
         <li *ngIf="authService.loggedIn()" class="mobileSideButton" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/statistics']" (click) ="_compCommunicationService.deactivateHomeSite()">Statistics</a></li>
 
       </ul>
