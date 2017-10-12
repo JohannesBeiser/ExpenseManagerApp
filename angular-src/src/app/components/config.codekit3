@@ -9,34 +9,11 @@
 	],
 "creatorBuild": "25900",
 "files": {
-	"\/dashboard\/dashboard.component.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/dashboard\/dashboard.component-min.css",
-		"oF": 0,
-		"oS": 3
-		},
 	"\/dashboard\/dashboard.component.html": {
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/dashboard\/dashboard.component.html",
 		"oF": 1
-		},
-	"\/dashboard\/dashboard.component.sass": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 2,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/dashboard\/dashboard.component.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
 		},
 	"\/dashboard\/dashboard.component.spec.ts": {
 		"cDF": 0,
