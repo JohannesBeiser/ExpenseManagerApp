@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -14,22 +14,15 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { ValidateService} from './services/validate.service';
 import { AuthService} from './services/auth.service';
-import {ComponentCommunicationService} from './services/component-communication.service';
-import {FlashMessagesModule} from 'angular2-flash-messages';
+import { ComponentCommunicationService} from './services/component-communication.service';
+import { FlashMessagesModule} from 'angular2-flash-messages';
 import { AuthGuard} from './guards/auth.guard';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ExpenseListComponent } from './components/expense-list/expense-list.component';
 
-
 import { ChartsModule } from 'ng2-charts';
 import { DatePickerModule } from 'ng2-datepicker';
-
-
-
-
-
-
 
 const appRoutes: Routes =[
     {path:'', component: HomeComponent},

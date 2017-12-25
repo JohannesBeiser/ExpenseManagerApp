@@ -82,7 +82,7 @@ window.onclick = function(event) {
 }*/
 chartData: any= [];
 chartLabels: any = [];
-backgroundColor:any =[];
+backgroundColor: any =[];
 
 public pieChartLabels:string[] = this.chartLabels;
 public pieChartData:number[] = this.chartData;
@@ -92,8 +92,8 @@ public pieChartOptions: any={
   legend: false,
   animation: false,
   tooltips: {
-    enabled: true,
-    bodyFontSize: 20
+  enabled: true,
+  bodyFontSize: 20
   }
 };
 
@@ -110,26 +110,59 @@ public getCategoryIconPath(categoryName: string) : string{ //FIXME:wird wiederho
   return path;
 }
 
+/* returns JSON containing day, month, year and formatted in formatted style
+ *
+ */
+public formatDate(day:number, month:number, year:number){
+  var formattedDay= "";
+  var formattedMonth ="";
+  var formattedYear = year + "";
+  var formattedFormatted ="";
+
+  if(day<10){
+    formattedDay="0" + day;
+  }else{
+    formattedDay= ""+day;
+  }
+
+  if(month<10){
+    formattedMonth= "0"+month;
+  }else{
+    formattedMonth=""+month
+  }
+  formattedFormatted = formattedDay + "-" + formattedMonth + "-" + formattedYear;
+
+  return {day: formattedDay, month: formattedMonth, year: formattedYear, formatted: formattedFormatted}
+}
+
+public addDaytoDate(count:number){//either 1 or -1 for inc- / decrement
+
+  var currentDatepickerDate = new Date(parseInt(this.datepickerDate.year),parseInt(this.datepickerDate.month)-1,parseInt(this.datepickerDate.day))
+  currentDatepickerDate.setDate(currentDatepickerDate.getDate() + count);
+  var day:any = currentDatepickerDate.getDate();
+  var month:any = currentDatepickerDate.getMonth()+1;
+  var year:any = currentDatepickerDate.getFullYear().toString();
+  var formattedDate= this.formatDate(day,month,year);
+
+  this.datepickerDate.formatted = formattedDate.formatted;
+  this.datepickerDate.day = formattedDate.day;
+  this.datepickerDate.month = formattedDate.month;
+  this.datepickerDate.year = formattedDate.year;
+}
+
+
 public setCurrentDateToDatepicker(){
   var day = this.newDate.getDate();
   var month = this.newDate.getMonth()+1;
   var year = this.newDate.getFullYear().toString();
-  if(day<10){
-    day="0" + day;
-  }else{
-    day= ""+day;
-  }
 
-  if(month<10){
-    month= "0"+month;
-  }else{
-    month=""+month
-  }
+  var formattedDate= this.formatDate(day,month,year);
+
   this.datepickerDate = new DateModel;
-  this.datepickerDate.formatted = day + "-" + month + "-" + year;
-  this.datepickerDate.day = day;
-  this.datepickerDate.month = month;
-  this.datepickerDate.year = year;
+  this.datepickerDate.formatted = formattedDate.formatted;
+  this.datepickerDate.day = formattedDate.day;
+  this.datepickerDate.month = formattedDate.month;
+  this.datepickerDate.year = formattedDate.year;
 }
 
   // events
@@ -162,6 +195,8 @@ public setCurrentDateToDatepicker(){
     }
 
   }
+
+
 
   public focusFunctionAddValue(){
     if(this.value !=undefined && this.value != "")
@@ -218,7 +253,7 @@ public setCurrentDateToDatepicker(){
         }
 
         var splitterChar: string = "-";
-        var seperatorIndex = this.datepickerDate.formatted.length -5
+        var seperatorIndex = this.datepickerDate.formatted.length -5;
         splitterChar = this.datepickerDate.formatted.charAt(seperatorIndex);
 
         var dateArr = this.datepickerDate.formatted.split(splitterChar);
@@ -236,7 +271,7 @@ public setCurrentDateToDatepicker(){
         expense.date.year = dateArr[2];
         expense.date.formatted = day+"-"+month+"-"+dateArr[2];
 
-        //TODO: wenn manuell eingegeben-->checken ob manuell und dann new DAtemodel mit dem formattetem befüllen ...bzw ist ja das dateModel scon durch init als aktuelles datum da...dann muss nur vor der sendung an den server day,month und year gesetzt werden
+        //TODO: wenn manuell eingegeben-->checken ob manuell und dann new Datemodel mit dem formattetem befüllen ...bzw ist ja das dateModel scon durch init als aktuelles datum da...dann muss nur vor der sendung an den server day,month und year gesetzt werden
 
         if(!this.validateService.validateExpenseValue(expense)){
           this.flashMessage.show("Please fill in a value", {cssClass: 'alert-danger', timeout:3000});

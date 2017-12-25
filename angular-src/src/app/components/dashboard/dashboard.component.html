@@ -13,7 +13,19 @@
       <form (submit)="onExpenseSubmit()">
 
       <label class="fullWidth">Value:<br><input (focus)="focusFunctionAddValue()" (blur)="onBlurAddExpenseValue()" [(ngModel)]="value" id="valueInput" type="text" name="value"  placeholder="0.00 €"></label><br>
-      <label class="fullWidth">Date:<br><ng2-datepicker style="color: #DDD" [options]="datepickerOptions" [(ngModel)]="datepickerDate" [ngModelOptions]="{standalone: true}"></ng2-datepicker></label><br> <!-- TODO: Date foratieren und nur date.formatted in database eintragen sodass auch nutzereingaben wie "6.2.1996" oder "18-6-2001" oder "15/06/2017" möglich sind  -->
+      <div class="dateWrapper">
+        <span (click)="addDaytoDate(-1)">&#10094;</span> <!-- TODO: Write function that increments date by "1" (if possible date+date that should be possible somehow) -->
+
+        <label class="fullWidth">Date:<br>
+          <ng2-datepicker style="color: #DDD" [options]="datepickerOptions" [(ngModel)]="datepickerDate" [ngModelOptions]="{standalone: true}"></ng2-datepicker>
+        </label>
+
+        <span (click)="addDaytoDate(1)">&#10095;</span>
+      </div>
+
+
+      <br>
+
       <hr class="hrAddExpense" style="margin-top: 5%">
       <div id="categoryOptionFields"> <!--TODO: Generate with *ngFor to enable to easily add a category later on-->
           <div id="categoryWrapper">

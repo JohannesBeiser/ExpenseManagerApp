@@ -34,6 +34,8 @@ export class ExpenseListComponent implements OnInit {
       this.monthActiveArray[this.currentDate.getMonth()+1]=true;
 
       this.loadUnfilteredList();
+
+      alert
   }
 
   //unfilteredExpenselist-->filteredList-->sortedList (...for production)
@@ -47,6 +49,25 @@ export class ExpenseListComponent implements OnInit {
   monthActiveArray: boolean[] = []
   monthNames: string[] =["January","February","March","April","May","June", "July", "August", "September", "Oktober", "November", "December"]
   everythingShown: boolean = false;
+
+
+  categories = this._compCommunicationService.categories;
+
+  sortedCategoryAscending: boolean = false; //is actually ascending, but arrow would be reversed, so user does see same direction arrow on first click but category is sorted from 0-->i not i-->0 (as initial value)
+  sortedAmountAscending : boolean = false;
+  sortedDateAscending : boolean = false;
+  sortedDescriptionAscending: boolean =false;
+
+  sortedCategory :boolean = false;
+  sortedAmount :boolean = false;
+  sortedDate :boolean = true;
+  sortedDescription: boolean = false;
+
+
+
+
+
+
 
 public showEverything(){
 //  this.filterYear = undefined;
@@ -99,27 +120,6 @@ public filterList(){
   }
 
 
-
-
-
-  categories = this._compCommunicationService.categories;
-
-  sortedCategoryAscending: boolean = false; //is actually ascending, but arrow would be reversed, so user does see same direction arrow on first click but category is sorted from 0-->i not i-->0 (as initial value)
-  sortedAmountAscending : boolean = false;
-  sortedDateAscending : boolean = false;
-  sortedDescriptionAscending: boolean =false;
-
-  sortedCategory :boolean = false;
-  sortedAmount :boolean = false;
-  sortedDate :boolean = true;
-  sortedDescription: boolean = false;
-
-
-/* Sorts the List according to variables above for
- * 1.) Category
- * 2.) Amount
- * 3.) Date
- */
 public sortEntries(){
   this.sortedList = [];
 
@@ -148,9 +148,9 @@ public sortEntries(){
         }
       }
 
-    if(this.sortedCategoryAscending){
-      this.sortedList.reverse();
-    }
+      if(this.sortedCategoryAscending){
+        this.sortedList.reverse();
+      }
   }else if(this.sortedAmount){
 
     if(this.filteredList !=undefined && this.filteredList.length != 0){

@@ -1,9 +1,5 @@
 /*
 Project startet on 13.08.2017
-
-To run the server, navigate to  Projects/meanauthapp
-and command "npm start" or "nodemon" for auto-updating-developing
-
  */
 
 const express = require('express');
@@ -24,27 +20,17 @@ mongoose.connection.on('error', function (err) {
     console.log('Database Error' + err);
 });
 
-
 const app = express();
 const port = 3000;
-
 const users = require('./routes/users');
 
-//CORS Middleware
-app.use(cors());
-
-//Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
-
-//Body Parser Middleware
-app.use(bodyParser.json());
-
-//Passport Middleware
-app.use(passport.initialize());
+app.use(cors());//CORS Middleware
+app.use(express.static(path.join(__dirname, 'public')));//Set static folder
+app.use(bodyParser.json());//Body Parser Middleware
+app.use(passport.initialize());//Passport Middleware
 app.use(passport.session());
 
 require('./config/passport')(passport);
-
 app.use('/users', users);
 
 //Index Route

@@ -15,14 +15,14 @@ export class AuthService {
   registerUser(user){
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/register',user,{headers: headers})
+    return this.http.post('users/register',user,{headers: headers})
       .map(res=> res.json());
   }
 
   authenticateUser(user){
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/authenticate',user,{headers: headers})
+    return this.http.post('users/authenticate',user,{headers: headers})
       .map(res=> res.json());
   }
 
@@ -39,7 +39,7 @@ export class AuthService {
         usr: username
       };
 
-    return this.http.post('http://localhost:3000/users/addExpense',both ,{headers: headers})
+    return this.http.post('users/addExpense',both ,{headers: headers})
       .map(res=> res.json());
   }
 
@@ -57,7 +57,7 @@ export class AuthService {
         usr: username
       };
 
-    return this.http.post('http://localhost:3000/users/editExpense',both ,{headers: headers})
+    return this.http.post('users/editExpense',both ,{headers: headers})
       .map(res=> res.json());
   }
 
@@ -74,7 +74,7 @@ export class AuthService {
       };
 
 
-    return this.http.post('http://localhost:3000/users/deleteExpense',both ,{headers: headers})
+    return this.http.post('users/deleteExpense',both ,{headers: headers})
       .map(res=> res.json());
 
   }
@@ -88,7 +88,7 @@ export class AuthService {
 
     var usernameJson = {username: JSON.parse(localStorage.getItem('user')).username};
 
-    return this.http.post('http://localhost:3000/users/resetDatabase',usernameJson ,{headers: headers})
+    return this.http.post('users/resetDatabase',usernameJson ,{headers: headers})
       .map(res=> res.json());
 
   }
@@ -101,7 +101,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/users/profile',{headers: headers})
+    return this.http.get('users/profile',{headers: headers})
       .map(res=> res.json());
   }
 
