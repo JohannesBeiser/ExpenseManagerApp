@@ -90,8 +90,18 @@ export class AuthService {
 
     return this.http.post('http://localhost:3000/users/resetDatabase',usernameJson ,{headers: headers})
       .map(res=> res.json());
-
   }
+
+  initDatabase(){
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    var usernameJson = {username: JSON.parse(localStorage.getItem('user')).username};
+
+    return this.http.post('http://localhost:3000/users/initDatabase',usernameJson ,{headers: headers})
+      .map(res=> res.json());
+  }
+
 
 
 

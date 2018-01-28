@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
 
 
   public clearDatabaseData(){
-
     var r = confirm("Are you sure you want to reset your Database? This will delete all of the entries forever !!!");
     if (r == true) {
       this.authService.clearDatabase().subscribe(data =>{
@@ -43,7 +42,23 @@ export class ProfileComponent implements OnInit {
       });    } else {
 
       }
-
   }
+
+  public initDatabase(){
+    var r = confirm("Are you sure you want to reset the Database and load the sample data?");
+    if (r == true) {
+      this.authService.initDatabase().subscribe(data =>{
+        if(data.success){
+          this.flashMessage.show("Sample data loaded", {cssClass: 'alert-success', timeout:1500});
+        }else{
+          this.flashMessage.show("Failed to load sample data", {cssClass: 'alert-danger', timeout:1500});
+        }
+      });    } else {
+
+      }
+  }
+
+
+
 
 }

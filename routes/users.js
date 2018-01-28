@@ -9,7 +9,6 @@ const User = require('../models/user');
 
 //Register
 router.post('/register', function (req, res, next) {
-    console.log("/register entered");
     const newUser = new User({
         nextExpenseDataId: req.body.nextExpenseDataId,
         name: req.body.name,
@@ -29,7 +28,6 @@ router.post('/register', function (req, res, next) {
 
 
 router.post('/addExpense', function (req, res, next) { // username weglassen und nur new expense schicken geht
-    console.log('addExpense entered');
     var username = req.body.usr;
     const newExpense = {
         expenseId: req.body.ex.expenseId,
@@ -49,7 +47,6 @@ router.post('/addExpense', function (req, res, next) { // username weglassen und
 
 
 router.post('/editExpense', function (req, res, next) { // username weglassen und nur new expense schicken geht
-    console.log('edit Expense entered');
     var username = req.body.usr;
     var expenseId = req.body.exId;
     const newExpense = {
@@ -72,7 +69,6 @@ router.post('/editExpense', function (req, res, next) { // username weglassen un
 
 
 router.post('/deleteExpense', function (req, res, next) {
-   console.log('/deleteExpense entered');
     var username = req.body.username;
     var index = req.body.index
 
@@ -89,9 +85,7 @@ router.post('/deleteExpense', function (req, res, next) {
 
 
 router.post('/resetDatabase', function (req, res, next) {
-   console.log('/resetDatabase entered');
     var username = req.body.username;
-    console.log(username);
     User.resetDatabase(username, function (err, user) {
         if(err){
             res.json({success: false, msg: 'Failed to reset Database'});
@@ -102,12 +96,22 @@ router.post('/resetDatabase', function (req, res, next) {
 });
 
 
+router.post('/initDatabase', function (req, res, next) {
+    var username = req.body.username;
+    User.initDatabase(username, function (err, user) {
+        if(err){
+            res.json({success: false, msg: 'Failed to init Database'});
+        }else{
+            res.json({success: true, msg: 'Database initiated'});
+        }
+    })
+});
+
 
 
 
 //Authenticate
 router.post('/authenticate', function (req, res, next) {
-    console.log("/authenticate entered");
     const username = req.body.username;
     const password = req.body.password;
 
