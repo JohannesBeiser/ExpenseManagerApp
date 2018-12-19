@@ -20,7 +20,5 @@
   },
   "author": "Johannes Beiser",
   "license": "ISC",
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
