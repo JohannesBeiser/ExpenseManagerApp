@@ -1,5 +1,9 @@
+# Update!
+This app will be migrated to a new project which will be added / forked here soon
+
+
 # ExpenseManagerApp
-This is a University project: The aim is to realise an Expense Manager Webapp with the MEAN Stack
+This was a University project: The aim is to realise an Expense Manager Webapp with the MEAN Stack
 
 IMPORTANT: The project is still in development progress -
 
